@@ -22,6 +22,7 @@
 #include <iostream>
 #include <string>
 #include "Palindrome.h"
+#include "Flowdown.h"
 
 using namespace std;
 
@@ -29,21 +30,23 @@ int main () {
     cout << "Dynamic programming algorithm to find the maximum palindrome" <<
         endl;
 
-    string someString = "helgabcqrp";
-    string someString1 = "racecar";
     string someString2 = "ACGTTCTAAAATCG";
 
-    cout << "Is " << someString << " a palindrome? " << isPalindrome( someString.c_str(), someString.length() ) << endl;
-    cout << "max palindrome length: " << maxPalindrome( someString ) << endl;
-    cout << "Calls to maxPalindrome: " << count << endl;
-    count = 0;
+    cout << "String: " << someString2 << endl;
+    Flowdown flowmanager1(someString2);
+    flowmanager1.calcMaximum();
+    cout << "Longest: " << flowmanager1.getMaximum() << " size: " << flowmanager1.getMaximum().size()<< endl << endl;
 
-    cout << "Is " << someString1 << " a palindrome? " << isPalindrome( someString1.c_str(), someString1.length() ) << endl;
-    cout << "max palindrome length: " << maxPalindrome( someString1 ) << endl;
-    cout << "Calls to maxPalindrome: " << count << endl;
-    count = 0;
+    string someString1 = "racecar";
+    cout << "String: " << someString1 << endl;
+    Flowdown flowmanager2(someString1);
+    flowmanager2.calcMaximum();
+    cout << "Longest: " << flowmanager2.getMaximum() << " size: " << flowmanager2.getMaximum().size() << endl << endl;
 
-    cout << "Is " << someString2 << " a palindrome? " << isPalindrome( someString2.c_str(), someString2.length() ) << endl;
-    cout << "max palindrome length: " << maxPalindrome( someString2 ) << endl;
-    cout << "Calls to maxPalindrome: " << count << endl;
+    string someString = "helgabcqrp";
+    cout << "String: " << someString << endl;
+    Flowdown flowmanager3(someString);
+    flowmanager3.printTable();
+    flowmanager3.calcMaximum();
+    cout << "Longest: " << flowmanager3.getMaximum() << " size: " << flowmanager3.getMaximum().size() << endl << endl;
 }

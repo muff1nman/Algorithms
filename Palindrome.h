@@ -21,9 +21,9 @@
 #include <stack>
 #include <queue>
 
-int count = 0;
+#pragma once
 
-bool isPalindrome( const char* string, int length ){
+static bool isPalindrome( const char* string, int length ){
     std::stack<char> theStack;
     std::queue<char> theQueue;
 
@@ -45,8 +45,7 @@ bool isPalindrome( const char* string, int length ){
 
 }
 
-size_t maxPalindrome( const std::string& someString ) {
-    ++count;
+static size_t maxPalindrome( const std::string& someString ) {
     if ( isPalindrome( someString.c_str(), someString.length() ) ) {
         return someString.length();
     } else {
