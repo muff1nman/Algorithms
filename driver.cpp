@@ -12,9 +12,9 @@
  *       Compiler:  gcc
  *
  *         Author:  Andrew DeMaria, ademaria@mines.edu
- *                  Tri Nguyen
- *                  Maria Deslis
- *   Organization:  
+ *                  Tri Nguyen, tringuye@mines.edu
+ *                  Maria Deslis, mdeslis@mines.edu
+ *   Organization:  Colorado School of Mines
  *
  * =====================================================================================
  */
