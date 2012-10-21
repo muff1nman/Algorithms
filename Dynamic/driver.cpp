@@ -34,6 +34,7 @@ int main () {
 
     cout << "String: " << someString2 << endl;
     Flowdown flowmanager1(someString2);
+    flowmanager1.printTable();
     flowmanager1.calcMaximum();
     cout << "Longest: " << flowmanager1.getMaximum() << " size: " << flowmanager1.getMaximum().size()<< endl << endl;
 
@@ -43,7 +44,7 @@ int main () {
     flowmanager2.calcMaximum();
     cout << "Longest: " << flowmanager2.getMaximum() << " size: " << flowmanager2.getMaximum().size() << endl << endl;
 
-    string someString = "helgabcqrp";
+    string someString = "gama";
     cout << "String: " << someString << endl;
     Flowdown flowmanager3(someString);
     flowmanager3.printTable();
