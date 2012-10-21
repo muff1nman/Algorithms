@@ -13,7 +13,7 @@
  * Create a table with the word along each axis with the diagonal
  * initialized to one.
  *
- *   g a m a
+ *     g a m a
  *   g 1 _ _ _
  *   a _ 1 _ _
  *   m _ _ 1 _
@@ -37,7 +37,7 @@
  *
  * Here is an example column calculation using column 2:
  *
- *   g a m a
+ *     g a m a
  *   g 1 _ _ _
  *   a _ 1 _ _
  *   m _ x 1 _
@@ -47,7 +47,7 @@
  * starts at the first "a" and goes to "m" i.e. "am".  This is not a
  * palindrome, so we copy the value above:
  *
- *   g a m a
+ *     g a m a
  *   g 1 _ _ _
  *   a _ 1 _ _
  *   m _ 1 1 _
@@ -56,7 +56,7 @@
  * Now we consider the next entry.  This substring is "ama" which is
  * palindrome so we replace the cell with the length which is 3. 
  *
- *   g a m a
+ *     g a m a
  *   g 1 _ _ _
  *   a _ 1 _ _
  *   m _ 1 1 _
@@ -64,7 +64,7 @@
  *
  * A fully populated table looks like this:
  *
- *   g a m a
+ *     g a m a
  *   g 1 1 1 1
  *   a 1 1 1 1
  *   m 1 1 1 1
@@ -77,7 +77,7 @@
  * algorithm.
  *
  * For an example of a bigger word:
- *   A C G T T C T A A A A T C G
+ *     A C G T T C T A A A A T C G
  *   A 1 1 1 1 1 1 1 1 1 1 1 1 1 1
  *   C 1 1 1 1 1 1 1 1 1 1 1 1 1 1
  *   G 1 1 1 1 1 1 1 1 1 1 1 1 1 1
