@@ -92,9 +92,9 @@
  *   T 1 1 1 2 3 1 6 4 3 2 1 1 1 1
  *   C 1 1 1 2 3 8 6 4 3 2 1 1 1 1 <-------
  *   G 1 1 1 2 3 8 6 4 3 2 1 1 1 1
- *                         ^               
- *                         |
- *                         |
+ *               ^               
+ *               |
+ *               |
  *
  *  So it can be seen that the largest is 8 in length and starts at the
  *  second "C" and ends at the last "C".   
