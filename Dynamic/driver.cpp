@@ -30,7 +30,12 @@ int main () {
     cout << "Dynamic programming algorithm to find the maximum palindrome" <<
         endl;
 
-    string someString2 = "ACGTTCTAAAATCG";
+    string someString2 = "ACGTGTCAAAATCG";
+
+    string smaller = "catc";
+
+    cout << "String: " << smaller << endl;
+    cout << "Longest subsequence: " << maxSequencePalindrome( smaller) << endl;
 
     cout << "String: " << someString2 << endl;
     Flowdown flowmanager1(someString2);
