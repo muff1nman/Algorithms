@@ -6,6 +6,9 @@ static std::string max (std::string& x, std::string& y) {
     return ( x.size() >= y.size() ) ? x : y;
 }
 
+/*
+ * This calculates the largest subsequence that is a palindrome... Tri's alg.
+ */
 static std::string LongestPalindromeSubsequence(std::string str)
 {
     // Base case: string is one character.
@@ -29,7 +32,7 @@ static std::string LongestPalindromeSubsequence(std::string str)
 
 
 /*
- * This calculates the largest subsequence that is a palindrome
+ * This calculates the largest subsequence that is a palindrome... Andrew's alg.
  */
 static std::string maxSequencePalindrome( const std::string& someString ) {
     if ( isPalindrome( someString.c_str(), someString.length() ) ) {

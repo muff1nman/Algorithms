@@ -11,7 +11,7 @@ std::string Flowdown::getMaximum(){
 void Flowdown::calcMaximum(){
     int index;
     int max = 0;
-    for ( int i = 0; i < table.size(); ++i ) {
+    for ( unsigned int i = 0; i < table.size(); ++i ) {
         if ( table[i][table.size() - 1] > max ) {
             max = table[i][table.size() - 1];
             index = i;
