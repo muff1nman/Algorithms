@@ -24,6 +24,7 @@
 #include "Palindrome.h"
 #include "Flowdown.h"
 #include "RecursiveSubsequence.h"
+#include "TableMatch.h"
 
 using namespace std;
 

@@ -1,6 +1,6 @@
 all : driver
 
-driver : driver.o Flowdown.o
+driver : driver.o Flowdown.o TableMatch.o
 	g++ driver.o Flowdown.o -o driver -g -Wall
 
 driver.o : driver.cpp Palindrome.h
@@ -8,6 +8,9 @@ driver.o : driver.cpp Palindrome.h
 
 Flowdown.o : Flowdown.cpp Flowdown.h
 	g++ -c Flowdown.cpp -g -Wall
+
+TableMatch.o : TableMatch.cpp TableMatch.h
+	g++ -c TableMatch.cpp -g -Wall
 
 clean : 
 	@rm -f *.o

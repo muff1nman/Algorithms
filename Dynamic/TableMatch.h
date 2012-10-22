@@ -21,6 +21,29 @@
 
 #include <cstdlib>
 #include <string>
+#include <set>
+#include <vector>
+
+class Subsequence {
+    public :
+        Subsequence( Subsequence* toMakeBigger, size_t first, size_t last);
+
+        size_t getFirstIndex() const { return this->first; }
+
+        size_t getLastIndex() const { return this->last; }
+
+        size_t getSize() const { return this->sequenceSize; }
+
+        // comparison operators
+        bool operator > ( const Subsequence& lhs );
+        bool operator = ( const Subsequence& lhs );
+        bool operator < ( const Subsequence& lhs );
+
+    private:
+        size_t first, last;
+        Subsequence* zergling;
+        size_t sequenceSize;
+};
 
 class TableMatch {
     public:
@@ -43,5 +66,7 @@ class TableMatch {
     private:
         std::string original;
         std::string largestSubsequence;
+        std::multiset<Subsequence> subOjects;
+        std::vector< std::vector< size_t > > table;
 
 };
