@@ -86,11 +86,13 @@ static size_t maxPalindrome( const std::string& someString ) {
     }
 }
 
+int count = 0;
+
 /*
  * This calculates the largest subsequence that is a palindrome
  */
 static std::string maxSequencePalindrome( const std::string& someString ) {
-
+    ++count;
     if ( isPalindrome( someString.c_str(), someString.length() ) ) {
         return someString;
     } else {
