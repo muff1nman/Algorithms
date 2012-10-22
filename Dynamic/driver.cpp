@@ -34,27 +34,36 @@ int main () {
 
     string someString2 = "ACGTGTCAAAATCG";
 
-    string smaller = "tq";
+    TableMatch tablematchManager( someString2 );
+    tablematchManager.generateEmptyTable();
+    tablematchManager.findMatches();
+    tablematchManager.printTable();
+    for ( unsigned int i = someString2.size() ; i != 0; --i ) {
+        tablematchManager.processRow(i - 1);
+        tablematchManager.printSequences();
+    }
 
-    cout << "String: " << smaller << endl;
-    cout << "Longest subsequence: " << maxSequencePalindrome( smaller) << endl;
-
-    cout << "String: " << someString2 << endl;
-    Flowdown flowmanager1(someString2);
-    flowmanager1.printTable();
-    flowmanager1.calcMaximum();
-    cout << "Longest: " << flowmanager1.getMaximum() << " size: " << flowmanager1.getMaximum().size()<< endl << endl;
-
-    string someString1 = "racecar";
-    cout << "String: " << someString1 << endl;
-    Flowdown flowmanager2(someString1);
-    flowmanager2.calcMaximum();
-    cout << "Longest: " << flowmanager2.getMaximum() << " size: " << flowmanager2.getMaximum().size() << endl << endl;
-
-    string someString = "gama";
-    cout << "String: " << someString << endl;
-    Flowdown flowmanager3(someString);
-    flowmanager3.printTable();
-    flowmanager3.calcMaximum();
-    cout << "Longest: " << flowmanager3.getMaximum() << " size: " << flowmanager3.getMaximum().size() << endl << endl;
+//    string smaller = "tq";
+//
+//    cout << "String: " << smaller << endl;
+//    cout << "Longest subsequence: " << maxSequencePalindrome( smaller) << endl;
+//
+//    cout << "String: " << someString2 << endl;
+//    Flowdown flowmanager1(someString2);
+//    flowmanager1.printTable();
+//    flowmanager1.calcMaximum();
+//    cout << "Longest: " << flowmanager1.getMaximum() << " size: " << flowmanager1.getMaximum().size()<< endl << endl;
+//
+//    string someString1 = "racecar";
+//    cout << "String: " << someString1 << endl;
+//    Flowdown flowmanager2(someString1);
+//    flowmanager2.calcMaximum();
+//    cout << "Longest: " << flowmanager2.getMaximum() << " size: " << flowmanager2.getMaximum().size() << endl << endl;
+//
+//    string someString = "gama";
+//    cout << "String: " << someString << endl;
+//    Flowdown flowmanager3(someString);
+//    flowmanager3.printTable();
+//    flowmanager3.calcMaximum();
+//    cout << "Longest: " << flowmanager3.getMaximum() << " size: " << flowmanager3.getMaximum().size() << endl << endl;
 }

@@ -23,6 +23,7 @@
 #include <string>
 #include <set>
 #include <vector>
+#include <iostream>                             /* For debugging only */
 
 class Subsequence {
     public :
@@ -35,9 +36,12 @@ class Subsequence {
         size_t getSize() const { return this->sequenceSize; }
 
         // comparison operators
-        bool operator > ( const Subsequence& lhs );
-        bool operator = ( const Subsequence& lhs );
-        bool operator < ( const Subsequence& lhs );
+        bool operator > ( const Subsequence& lhs ) const ;
+        bool operator = ( const Subsequence& lhs ) const ;
+        bool operator < ( const Subsequence& lhs ) const ;
+
+        // for debugging
+        friend std::ostream& operator << ( std::ostream& out, const Subsequence& rhs);
 
     private:
         size_t first, last;
@@ -45,10 +49,15 @@ class Subsequence {
         size_t sequenceSize;
 };
 
+std::ostream& operator << ( std::ostream& out, const Subsequence& rhs);
+
 class TableMatch {
     public:
         // ctor
         TableMatch( const std::string& original ) : original(original) { }
+
+        // dtor
+        ~TableMatch();
 
         // wraps up all the dirty work into one step
         std::string findMax();
@@ -61,12 +70,29 @@ class TableMatch {
         void findMatches();
 
         // adds indice, value, parent pairs to the given container.
-        void processRow();
+        void processRow( unsigned int row );
+
+        // for debugging
+        void printTable() const ;
+
+        // for debugging
+        void printSequences() const ;
 
     private:
         std::string original;
         std::string largestSubsequence;
-        std::multiset<Subsequence> subOjects;
+        std::vector<Subsequence*> subOjects;
         std::vector< std::vector< size_t > > table;
+
+
+        /*-----------------------------------------------------------------------------
+         *  Helper functions
+         *-----------------------------------------------------------------------------*/
+
+        void putOnesInDiagonal();
+
+        // returns the largest Subsequence that fits BETWEEN (non inclusive)
+        // these indices
+        Subsequence* getLargestZergling( size_t first, size_t last );
 
 };
