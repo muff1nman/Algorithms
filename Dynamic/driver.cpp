@@ -23,6 +23,7 @@
 #include <string>
 #include "Palindrome.h"
 #include "Flowdown.h"
+#include "RecursiveSubsequence.h"
 
 using namespace std;
 
@@ -36,7 +37,6 @@ int main () {
 
     cout << "String: " << smaller << endl;
     cout << "Longest subsequence: " << maxSequencePalindrome( smaller) << endl;
-    cout << "With number of calls: " << count << endl;
 
     cout << "String: " << someString2 << endl;
     Flowdown flowmanager1(someString2);

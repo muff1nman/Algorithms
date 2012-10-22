@@ -2,11 +2,11 @@
 #include <string>
 #include <iostream>
 
-std::string max (std::string& x, std::string& y) {
+static std::string max (std::string& x, std::string& y) {
     return ( x.size() >= y.size() ) ? x : y;
 }
 
-std::string LongestPalindromeSubsequence(std::string str)
+static std::string LongestPalindromeSubsequence(std::string str)
 {
     // Base case: string is one character.
     if (str.size() == 1)
@@ -25,4 +25,36 @@ std::string LongestPalindromeSubsequence(std::string str)
     std::string left = LongestPalindromeSubsequence(str.substr(0, str.size()-1));
     std::string right = LongestPalindromeSubsequence(str.substr(1));
     return ::max(left, right);
+}
+
+
+/*
+ * This calculates the largest subsequence that is a palindrome
+ */
+static std::string maxSequencePalindrome( const std::string& someString ) {
+    if ( isPalindrome( someString.c_str(), someString.length() ) ) {
+        return someString;
+    } else {
+        std::string rightHalf;
+        std::string leftHalf;
+        std::string combined;
+
+        size_t max = 0;
+        std::string toReturn = "";
+        std::string temp;
+        // get the largest value from the following
+        for (unsigned int i = 0; i < someString.length(); ++i ) {
+            leftHalf = someString.substr(0, i);
+            rightHalf = someString.substr(i+1);
+            combined = leftHalf + rightHalf;
+
+            temp = maxSequencePalindrome( combined );
+            if ( max < temp.length() ) {
+                max = temp.length();
+                toReturn = temp;
+            }
+        }
+
+        return toReturn;
+    }
 }
