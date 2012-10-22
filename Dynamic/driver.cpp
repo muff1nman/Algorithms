@@ -32,10 +32,11 @@ int main () {
 
     string someString2 = "ACGTGTCAAAATCG";
 
-    string smaller = "catc";
+    string smaller = "tq";
 
     cout << "String: " << smaller << endl;
     cout << "Longest subsequence: " << maxSequencePalindrome( smaller) << endl;
+    cout << "With number of calls: " << count << endl;
 
     cout << "String: " << someString2 << endl;
     Flowdown flowmanager1(someString2);
