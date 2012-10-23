@@ -156,7 +156,6 @@ void TableMatch::generateString() {
 
 }
 
-
 std::string TableMatch::followDown( Subsequence* follow ) const {
     if  ( follow->zergling == NULL ) {
         std::string toReturn;
