@@ -1,10 +1,6 @@
-#include <stdio.h>
 #include <string>
 #include <iostream>
-
-static std::string max (std::string& x, std::string& y) {
-    return ( x.size() >= y.size() ) ? x : y;
-}
+#include <vector>
 
 /*
  * This calculates the largest subsequence that is a palindrome... Tri's alg.
@@ -12,24 +8,66 @@ static std::string max (std::string& x, std::string& y) {
 static std::string LongestPalindromeSubsequence(std::string str)
 {
     // Base case: string is one character.
-    if (str.size() == 1)
+    if (str.length() == 1)
         return str;
 
     // Base case:: string is only 2 the same character.
-    if (str[0] == str[1] && str.size() == 2)
+    if (str[0] == str[1] && str.length() == 2)
         return str;
 
     // Both ends of the string is the same.
-    if (str[0] == str[str.size()-1]) {
-        return str[0] + LongestPalindromeSubsequence(str.substr(1, str.size()-2)) + str [0];
+    if (str[0] == str[str.length()-1]) {
+        return str[0] + LongestPalindromeSubsequence(str.substr(1, str.length()-2)) + str [0];
     }
 
     // Neither ends of of the string is the same.
-    std::string left = LongestPalindromeSubsequence(str.substr(0, str.size()-1));
+    std::string left = LongestPalindromeSubsequence(str.substr(0, str.length()-1));
     std::string right = LongestPalindromeSubsequence(str.substr(1));
-    return ::max(left, right);
+    return (left.length() >= right.length()) ? left : right;
 }
 
+/*
+ * This calculates the largest subsequence that is a palindrome... Tri's alg.
+ */
+static std::string LongestPalindromeSubsequenceDynamic(std::string str)
+{
+    std::vector<std::vector<std::string> > palindromeTable;
+
+    // Fill the array with blanks spaces.
+    for( int i = 0; i < str.length(); i++) {
+        std::vector<std::string> temp;
+        for (int j = 0; j < str.length(); j++) {
+            temp.push_back(" ");
+        }
+        palindromeTable.push_back(temp);
+    }
+
+    // Fill the array's diagonal with character of the strings.
+    for (int i = 0; i < str.length(); i++) {
+       palindromeTable[i][i] = str[i];
+    }
+
+
+    for (int substringLength = 2; substringLength <= str.length(); substringLength++)
+    {
+        for (int i = 0; i < str.length() - substringLength + 1; i++)
+        {
+            int j = i + substringLength - 1;
+            if (str[i] == str[j] && substringLength == 2) {
+                palindromeTable[i][j] = str.substr(i, 2);
+            }
+            else if (str[i] == str[j]) {
+                palindromeTable[i][j] = str[i] + palindromeTable[i+1][j-1] + str[j];
+            }
+            else {
+                std::string left = palindromeTable[i][j-1];
+                std::string right = palindromeTable[i+1][j];
+                palindromeTable[i][j] =  (left.length() >= right.length()) ? left : right;
+            }
+        }
+    }
+    return palindromeTable[0][str.length()-1];
+}
 
 /*
  * This calculates the largest subsequence that is a palindrome... Andrew's alg.
