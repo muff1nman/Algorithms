@@ -33,10 +33,25 @@ int main () {
         endl;
 
     string someString2 = "ACGTGTCAAAATCG";
-
     TableMatch tablematchManager( someString2 );
+    cout << someString2 << " has palindrome subsequence: " <<  tablematchManager.findMax() << endl;
 
-    cout << tablematchManager.findMax() << endl;
+    string another1 = "catc";
+    tablematchManager = TableMatch( another1 );
+    tablematchManager.generateEmptyTable();
+    tablematchManager.findMatches();
+    tablematchManager.addObvious();
+    tablematchManager.printTable();
+    for ( unsigned int i = another1.size(); i != 0; --i ) {
+        tablematchManager.printSequences();
+        tablematchManager.processRow( i - 1 );
+        tablematchManager.printSequences();
+    }
+
+    tablematchManager.generateString();
+
+    cout << another1 << " has palindrome subsequence: " <<  tablematchManager.getString() << endl;
+
 
     string smaller = "tq";
 

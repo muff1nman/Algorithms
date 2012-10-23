@@ -3,12 +3,17 @@
 Subsequence::Subsequence( Subsequence* toMakeBigger, size_t first, size_t last)
     : first(first), last(last), zergling(toMakeBigger) {
 
-        if ( this->zergling == NULL ) {
-            this->sequenceSize = 2;
-        } else {
-            this->sequenceSize = toMakeBigger->sequenceSize + 2;
+        size_t newSize = 2;
+
+        if ( first == last ) {
+           newSize = 1; 
         }
 
+        if ( this->zergling == NULL ) {
+            this->sequenceSize = newSize;
+        } else {
+            this->sequenceSize = toMakeBigger->sequenceSize + newSize;
+        }
 }
 
 bool Subsequence::operator > ( const Subsequence& lhs )  const {
@@ -31,6 +36,7 @@ std::ostream& operator << ( std::ostream& out, const Subsequence& rhs ) {
 std::string TableMatch::findMax() {
     this->generateEmptyTable();
     this->findMatches();
+    this->addObvious();
     for ( unsigned int i = this->original.size(); i != 0; --i ) {
         this->processRow( i - 1 );
     }
@@ -158,11 +164,29 @@ void TableMatch::generateString() {
 
 std::string TableMatch::followDown( Subsequence* follow ) const {
     if  ( follow->zergling == NULL ) {
+
         std::string toReturn;
-        toReturn.push_back(this->original[follow->first]);
-        toReturn.push_back(this->original[follow->last]);
-        return  toReturn;
+
+        if ( follow->sequenceSize == 2 ) {
+            toReturn.push_back(this->original[follow->first]);
+            toReturn.push_back(this->original[follow->last]);
+        } else {
+            // sequence size must be 1 and first and last are the same index
+            // use only one of them
+            toReturn.push_back(this->original[follow->first]);
+            std::cout << "Here!" << std::endl;
+        }
+
+        return toReturn;
+
     } else {
         return this->original[follow->first] + followDown( follow->zergling) + this->original[follow->last];
+    }
+}
+
+void TableMatch::addObvious() {
+    for ( unsigned int i = 0; i < this->original.size(); ++i ) {
+        Subsequence* single = new Subsequence( NULL, i, i);
+        this->subOjects.push_back( single );
     }
 }
