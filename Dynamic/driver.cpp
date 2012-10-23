@@ -35,13 +35,17 @@ int main () {
     string someString2 = "ACGTGTCAAAATCG";
 
     TableMatch tablematchManager( someString2 );
-    tablematchManager.generateEmptyTable();
-    tablematchManager.findMatches();
-    tablematchManager.printTable();
-    for ( unsigned int i = someString2.size() ; i != 0; --i ) {
-        tablematchManager.processRow(i - 1);
-        tablematchManager.printSequences();
-    }
+//    tablematchManager.generateEmptyTable();
+//    tablematchManager.findMatches();
+//    tablematchManager.printTable();
+//    for ( unsigned int i = someString2.size() ; i != 0; --i ) {
+//        tablematchManager.processRow(i - 1);
+//        tablematchManager.printSequences();
+//    }
+//
+//    tablematchManager.generateString();
+
+    cout << tablematchManager.findMax() << endl;
 
 //    string smaller = "tq";
 //

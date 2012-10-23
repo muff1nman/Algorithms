@@ -43,6 +43,8 @@ class Subsequence {
         // for debugging
         friend std::ostream& operator << ( std::ostream& out, const Subsequence& rhs);
 
+        friend class TableMatch;
+
     private:
         size_t first, last;
         Subsequence* zergling;
@@ -61,16 +63,6 @@ class TableMatch {
 
         // wraps up all the dirty work into one step
         std::string findMax();
-
-        // generates an empty table except with the diagonal as 1's
-        void generateEmptyTable();
-
-        // populates the table with 1's at the intersections of matching
-        // characters.  Only uses the upper right half of the table
-        void findMatches();
-
-        // adds indice, value, parent pairs to the given container.
-        void processRow( unsigned int row );
 
         // for debugging
         void printTable() const ;
@@ -94,5 +86,23 @@ class TableMatch {
         // returns the largest Subsequence that fits BETWEEN (non inclusive)
         // these indices
         Subsequence* getLargestZergling( size_t first, size_t last );
+
+        // find the Subsequence with the largest size
+        Subsequence* getLargestZergling();
+
+        std::string followDown( Subsequence* follow ) const ;
+
+        // generates the string by jumping back through all the Subsequences
+        void generateString();
+
+        // generates an empty table except with the diagonal as 1's
+        void generateEmptyTable();
+
+        // populates the table with 1's at the intersections of matching
+        // characters.  Only uses the upper right half of the table
+        void findMatches();
+
+        // adds indice, value, parent pairs to the given container.
+        void processRow( unsigned int row );
 
 };

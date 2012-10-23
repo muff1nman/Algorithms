@@ -29,8 +29,15 @@ std::ostream& operator << ( std::ostream& out, const Subsequence& rhs ) {
 }
 
 std::string TableMatch::findMax() {
-    // TODO
-    return "";
+    this->generateEmptyTable();
+    this->findMatches();
+    for ( unsigned int i = this->original.size(); i != 0; --i ) {
+        this->processRow( i - 1 );
+    }
+
+    this->generateString();
+
+    return this->largestSubsequence;
 }
 
 void TableMatch::generateEmptyTable() {
@@ -123,5 +130,40 @@ TableMatch::~TableMatch() {
 void TableMatch::printSequences() const {
     for ( unsigned int i = 0; i< subOjects.size(); ++i ) {
         std::cout << *subOjects[i] << std::endl;
+    }
+}
+
+Subsequence* TableMatch::getLargestZergling() {
+
+    size_t max = 0;
+    Subsequence* temp = NULL;
+
+    for ( unsigned int i = 0; i< this->subOjects.size(); ++i ){
+        if ( subOjects[i]->getSize() > max ) {
+            max = subOjects[i]->getSize();
+            temp = subOjects[i];
+        }
+    }
+
+    return temp;
+}
+
+void TableMatch::generateString() {
+    Subsequence* follow = this->getLargestZergling();
+    std::string temp = this->followDown( follow );
+
+    this->largestSubsequence = temp;
+
+}
+
+
+std::string TableMatch::followDown( Subsequence* follow ) const {
+    if  ( follow->zergling == NULL ) {
+        std::string toReturn;
+        toReturn.push_back(this->original[follow->first]);
+        toReturn.push_back(this->original[follow->last]);
+        return  toReturn;
+    } else {
+        return this->original[follow->first] + followDown( follow->zergling) + this->original[follow->last];
     }
 }
