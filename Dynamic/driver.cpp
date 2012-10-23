@@ -45,4 +45,18 @@ int main () {
     cout << "String: " << smaller << endl;
     cout << "Longest subsequence: " << maxSequencePalindrome( smaller) << endl;
 
+
+    string another2 = "arpwjersspsss";
+    tablematchManager = TableMatch( another2 );
+    cout << "Using algorithm: " << "TableMatch" << endl;
+    cout << "Longest subsequence: " <<  tablematchManager.findMax() << endl;
+    cout << "Using algorithm: " << "LongestPalindromeSubsequence" << endl;
+    cout << "Longest subsequence: " << LongestPalindromeSubsequence( another2 ) << endl;
+    cout << "Using algorithm: " << "maxSequencePalindrome" << endl;
+    cout << "Are you sure you want to test this one? ---it takes a really long time for anything above 4 characters... Y/N?";
+    std::string reply;
+    cin >> reply;
+    if ( reply == "Y" || reply == "y" ) {
+        cout << "Longest subsequence: " << maxSequencePalindrome(another2 ) << endl;
+    }
 }
