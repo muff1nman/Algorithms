@@ -38,42 +38,11 @@ int main () {
 
     string another1 = "catc";
     tablematchManager = TableMatch( another1 );
-    tablematchManager.generateEmptyTable();
-    tablematchManager.findMatches();
-    tablematchManager.addObvious();
-    tablematchManager.printTable();
-    for ( unsigned int i = another1.size(); i != 0; --i ) {
-        tablematchManager.printSequences();
-        tablematchManager.processRow( i - 1 );
-        tablematchManager.printSequences();
-    }
-
-    tablematchManager.generateString();
-
-    cout << another1 << " has palindrome subsequence: " <<  tablematchManager.getString() << endl;
+    cout << another1 << " has palindrome subsequence: " <<  tablematchManager.findMax() << endl;
 
 
-    string smaller = "tq";
-
+    string smaller = "catc";
     cout << "String: " << smaller << endl;
     cout << "Longest subsequence: " << maxSequencePalindrome( smaller) << endl;
 
-    cout << "String: " << someString2 << endl;
-    Flowdown flowmanager1(someString2);
-    flowmanager1.printTable();
-    flowmanager1.calcMaximum();
-    cout << "Longest: " << flowmanager1.getMaximum() << " size: " << flowmanager1.getMaximum().size()<< endl << endl;
-
-    string someString1 = "racecar";
-    cout << "String: " << someString1 << endl;
-    Flowdown flowmanager2(someString1);
-    flowmanager2.calcMaximum();
-    cout << "Longest: " << flowmanager2.getMaximum() << " size: " << flowmanager2.getMaximum().size() << endl << endl;
-
-    string someString = "gama";
-    cout << "String: " << someString << endl;
-    Flowdown flowmanager3(someString);
-    flowmanager3.printTable();
-    flowmanager3.calcMaximum();
-    cout << "Longest: " << flowmanager3.getMaximum() << " size: " << flowmanager3.getMaximum().size() << endl << endl;
 }

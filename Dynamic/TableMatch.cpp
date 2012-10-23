@@ -174,7 +174,6 @@ std::string TableMatch::followDown( Subsequence* follow ) const {
             // sequence size must be 1 and first and last are the same index
             // use only one of them
             toReturn.push_back(this->original[follow->first]);
-            std::cout << "Here!" << std::endl;
         }
 
         return toReturn;

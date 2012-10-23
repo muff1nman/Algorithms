@@ -70,11 +70,6 @@ class TableMatch {
         // for debugging
         void printSequences() const ;
 
-        // debugging
-        std::string getString() const {
-            return this->largestSubsequence;
-        }
-
     private:
         std::string original;
         std::string largestSubsequence;
@@ -85,7 +80,6 @@ class TableMatch {
         /*-----------------------------------------------------------------------------
          *  Helper functions
          *-----------------------------------------------------------------------------*/
-    public:
         void putOnesInDiagonal();
 
         // returns the largest Subsequence that fits BETWEEN (non inclusive)
@@ -113,6 +107,5 @@ class TableMatch {
         // add the obvious data sets to the Subsequences
         // i.e. cat should have (1,1):1, (2,2):2, etc
         void addObvious();
-
 
 };
