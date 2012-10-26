@@ -27,9 +27,12 @@ struct Coord {
     size_t row,col;
 };
 
-enum Parent {
-    LEFT, DIAGONAL, RIGHT;
-};
+// encapsulate with a namespace to prevent collisions
+namespace ParentType {
+    enum Parent {
+        LEFT, DIAGONAL, DOWN,
+    };
+}
 
 struct PalStruct {
     Coord self;

@@ -25,7 +25,7 @@
 
 class BuildUp {
 
-    BuildUp( std::string original );
+    BuildUp( std::string original ) : original(original) {}
 
     private:
         std::string original;
@@ -57,4 +57,9 @@ class BuildUp {
         // that is in the rest of the array
         void calcCell();
 
+        // returns whether the character represented by the currentCell are
+        // matching
+        bool charactersMatch();
+
+        PalStruct getAdjacent
 };
