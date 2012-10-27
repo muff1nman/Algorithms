@@ -23,7 +23,7 @@ static std::string LongestPalindromeSubsequence(std::string str)
     // Neither ends of of the string is the same.
     std::string left = LongestPalindromeSubsequence(str.substr(0, str.length()-1));
     std::string right = LongestPalindromeSubsequence(str.substr(1));
-    return (left.length() >= right.length()) ? left : right;
+    return (left.length() <= right.length()) ? right : left;
 }
 
 /*
@@ -61,8 +61,8 @@ static std::string LongestPalindromeSubsequenceDynamic(std::string str)
             }
             else {
                 std::string left = palindromeTable[i][j-1];
-                std::string right = palindromeTable[i+1][j];
-                palindromeTable[i][j] =  (left.length() >= right.length()) ? left : right;
+                std::string right = palindromeTable[i+1][j
+                palindromeTable[i][j] =  (left.length() <= right.length()) ?  right : left;
             }
         }
     }
