@@ -21,21 +21,34 @@ void BuildUp::populateDiagonal() {
 }
 
 bool BuildUp::hasNextCell() {
-    // TODO
-    return false;
+ 	//as long as incrment both col and row does not put you out of row
+	//continue hasNextCell
+	if (currentCell.row + 1 == original.size()) {
+		return false;
+	} else if (currentCell.col + 1 == original.size()){ 
+		return false;
+	} else {
+		return true;
+	}
+
 }
 
 bool BuildUp::hasNextDiagonal() {
-    // TODO
-    return false;
+	//size_t currentDiagonal
+	//as long as the size != original.size()
+	return (currentDiagonal != original.size());
 }
 
 void BuildUp::incrementCell() {
-    // TODO
+	//increment hasNextCell
+	++currentCell.row;
+	++currentCell.col;
 }
 
 void BuildUp::incrementDiagonal() {
-    // TODO
+	//incrementing hasNextDiagonal
+	++currentDiagonal.row;
+	++currentDiagonal.col;
 }
 
 void BuildUp::calcCell() {
