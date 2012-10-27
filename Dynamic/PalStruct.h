@@ -30,7 +30,7 @@ struct Coord {
 // encapsulate with a namespace to prevent collisions
 namespace ParentType {
     enum Parent {
-        LEFT, DIAGONAL, DOWN,
+        LEFT, DIAGONAL, DOWN, BASECASE
     };
 }
 
@@ -38,6 +38,9 @@ struct PalStruct {
     ParentType::Parent parent;
 
     size_t maxPalSeqSize;
+
+    PalStruct( ParentType::Parent parent, size_t maxPalSeqSize ) :
+        parent(parent), maxPalSeqSize( maxPalSeqSize ) {}
 
     bool operator < ( const PalStruct& other ) const {
         return this->maxPalSeqSize < other.maxPalSeqSize;
