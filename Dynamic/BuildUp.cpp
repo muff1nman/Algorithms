@@ -1,11 +1,23 @@
 #include "BuildUp.h"
 
 void BuildUp::initArray() {
-    // TODO
+	//making the table the dimensions of the string
+	//top level vector, a vector for each row
+	table.resize(original.size());
+	
+	//we want to resize the vector for each row in the table
+	for (unsigned int i = 0; i < original.size(); ++i) {
+		//resize each of the vectors
+		table[i].resize(original.size());
+	}
 }
 
 void BuildUp::populateDiagonal() {
-    // TODO
+	//we want the parent to be the basecase
+	//not pointing to anything, therefore null
+	for (unsigned int i = 0; i < original.size(); ++i) {
+		table[i][i] = PalStruct(ParentType::BASECASE, 1);
+	}
 }
 
 bool BuildUp::hasNextCell() {
