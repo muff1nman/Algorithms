@@ -33,7 +33,7 @@ int main () {
     cout << "Dynamic programming algorithm to find the maximum palindrome" <<
         endl;
 
-    string test = "maria";
+    string test = "ACGTGTCAAAATCG";
     BuildUp mananger( test );
 
     mananger.initArray();
