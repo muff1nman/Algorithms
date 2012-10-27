@@ -100,3 +100,23 @@ void BuildUp::setCurrent( ParentType::Parent parent ) {
        table[this->currentCell.row][this->currentCell.col].maxPalSeqSize += 2;
    }
 }
+
+std::string BuildUp::getPalindromeSubsequence () {
+    
+}
+
+std::string BuildUp::recursiveTraceback( Coord current ) {
+    if ( table[current.row][current.col].parent == ParentType::BASECASE ) {
+        // two base cases... a single character and two characters
+        if ( current.row == current.col ) {
+            // single character
+            return original[current.row];
+        } else {
+            // double character (the same but use row and col just for
+            // correctness
+            return orginal[current.row] + original[current.col];
+        }
+    }
+
+    // TODO
+}

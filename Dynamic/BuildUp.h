@@ -71,5 +71,13 @@ class BuildUp {
 
         // set the current PalStruct using the supplied parent as the parent
         void setCurrent( ParentType::Parent parent );
+
+        // generates the maximum palindrome subsequence by using a recursive
+        // traceback to the base case
+        std::string getPalindromeSubsequence ();
+
+        // the recursive traceback from the upper right to the base case
+        // (main diagonal)
+        std::string recursiveTraceback( Coord parent );
 };
 
