@@ -40,19 +40,18 @@ void BuildUp::calcCell() {
         }
     }
 
-
 }
 
 bool BuildUp::charactersMatch() {
-    // TODO
-    return false;
+    return original[currentCell.row] == original[currentCell.col];
 }
 
 PalStruct BuildUp::getAdjacent( ParentType::Parent parent ) {
-    // TODO
     size_t row = this->currentCell.row;
     size_t col = this->currentCell.col;
 
+    // pretty self explanatory here.  Just remember that diagonal is down and to
+    // the left
     if ( parent == ParentType::DIAGONAL ) {
         row += 1;
         col += -1;
@@ -71,7 +70,7 @@ void BuildUp::setCurrent( ParentType::Parent parent ) {
    table[this->currentCell.row][this->currentCell.col].maxPalSeqSize =
        this->getAdjacent(parent).maxPalSeqSize;
 
-   // only if the parenttype is diagonal then increase the maximum palindrome
+   // only if the parent type is diagonal then increase the maximum palindrome
    // length
    if ( parent == ParentType::DIAGONAL ) {
        table[this->currentCell.row][this->currentCell.col].maxPalSeqSize += 2;
