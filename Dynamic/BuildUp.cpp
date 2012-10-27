@@ -47,8 +47,7 @@ void BuildUp::incrementCell() {
 
 void BuildUp::incrementDiagonal() {
 	//incrementing hasNextDiagonal
-	++currentDiagonal.row;
-	++currentDiagonal.col;
+	++currentDiagonal;
 }
 
 void BuildUp::calcCell() {
