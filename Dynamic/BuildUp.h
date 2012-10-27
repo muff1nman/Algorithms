@@ -61,5 +61,10 @@ class BuildUp {
         // matching
         bool charactersMatch();
 
-        PalStruct getAdjacent
+        // get the adjacent PalStruct based on the supplied parent direction
+        PalStruct getAdjacent( ParentType::Parent parent );
+
+        // set the current PalStruct using the supplied parent as the parent
+        void setCurrent( ParentType::Parent parent );
 };
+

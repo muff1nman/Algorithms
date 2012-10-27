@@ -35,10 +35,20 @@ namespace ParentType {
 }
 
 struct PalStruct {
-    Coord self;
-
-    Parent parent;
+    ParentType::Parent parent;
 
     size_t maxPalSeqSize;
+
+    bool operator < ( const PalStruct& other ) const {
+        return this->maxPalSeqSize < other.maxPalSeqSize;
+    }
+
+    bool operator > ( const PalStruct& other ) const {
+        return this->maxPalSeqSize > other.maxPalSeqSize;
+    }
+
+    bool operator == ( const PalStruct& other ) const {
+        return this->maxPalSeqSize == other.maxPalSeqSize;
+    }
 
 };

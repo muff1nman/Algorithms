@@ -28,15 +28,15 @@ void BuildUp::incrementDiagonal() {
 
 void BuildUp::calcCell() {
     if ( charactersMatch() ) {
-        // TODO
         // set to point to Diagonal
+        setCurrent( ParentType::DIAGONAL );
     } else {
         if ( getAdjacent( ParentType::LEFT ) > getAdjacent( ParentType::DOWN ) ) {
             // set to point to left
-            // TODO
+            setCurrent( ParentType::LEFT );
         } else {
             // set to point to down
-            // TODO
+            setCurrent( ParentType::DOWN );
         }
     }
 
@@ -48,7 +48,32 @@ bool BuildUp::charactersMatch() {
     return false;
 }
 
-PalStruct BuildUp::getAdjacent( ParentType::Parent type ) {
+PalStruct BuildUp::getAdjacent( ParentType::Parent parent ) {
     // TODO
-    return table[0][0];
+    size_t row = this->currentCell.row;
+    size_t col = this->currentCell.col;
+
+    if ( parent == ParentType::DIAGONAL ) {
+        row += 1;
+        col += -1;
+    } else if ( parent == ParentType::DOWN ) {
+        row += 1;
+    } else if ( parent == ParentType::LEFT ) {
+        col += -1;
+    }
+
+    return table[row][col];
+}
+
+void BuildUp::setCurrent( ParentType::Parent parent ) {
+   table[this->currentCell.row][this->currentCell.col].parent = parent;
+
+   table[this->currentCell.row][this->currentCell.col].maxPalSeqSize =
+       this->getAdjacent(parent).maxPalSeqSize;
+
+   // only if the parenttype is diagonal then increase the maximum palindrome
+   // length
+   if ( parent == ParentType::DIAGONAL ) {
+       table[this->currentCell.row][this->currentCell.col].maxPalSeqSize += 2;
+   }
 }
