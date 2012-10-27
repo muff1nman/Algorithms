@@ -25,6 +25,7 @@
 #include "Flowdown.h"
 #include "RecursiveSubsequence.h"
 #include "TableMatch.h"
+#include "BuildUp.h"
 
 using namespace std;
 
@@ -32,32 +33,23 @@ int main () {
     cout << "Dynamic programming algorithm to find the maximum palindrome" <<
         endl;
 
-    string someString2 = "ACGTGTCAAAATCG";
-    TableMatch tablematchManager( someString2 );
-    cout << someString2 << " has palindrome subsequence: " <<  tablematchManager.findMax() << endl;
+    string test = "hello";
+    BuildUp mananger( test );
 
-    string another1 = "catc";
-    tablematchManager = TableMatch( another1 );
-    cout << another1 << " has palindrome subsequence: " <<  tablematchManager.findMax() << endl;
+    mananger.initArray();
+    mananger.populateDiagonal();
+    while ( mananger.hasNextDiagonal() ) {
+        while ( mananger.hasNextCell() ) {
+            mananger.calcCell();
+            mananger.incrementCell();
+        } 
+
+        mananger.incrementDiagonal();
+    }
+
+    cout << mananger.getPalindromeSubsequence() << endl;
 
 
-    string smaller = "catc";
-    cout << "String: " << smaller << endl;
-    cout << "Longest subsequence: " << maxSequencePalindrome( smaller) << endl;
 
 
-    string another2 = "AJALSKDFPJQFFWLCFWLCFWLCWLCG";
-    cout << "String: " << another2 << endl;
-    tablematchManager = TableMatch( another2 );
-    cout << "Using algorithm: " << "TableMatch" << endl;
-    cout << "Longest subsequence: " <<  tablematchManager.findMax() << endl;
-    cout << "Using algorithm: " << "LongestPalindromeSubsequence" << endl;
-    cout << "Longest subsequence: " << LongestPalindromeSubsequence( another2 ) << endl;
-//    cout << "Using algorithm: " << "maxSequencePalindrome" << endl;
-//    cout << "Are you sure you want to test this one? ---it takes a really long time for anything above 4 characters... Y/N?";
-//    std::string reply;
-//    cin >> reply;
-//    if ( reply == "Y" || reply == "y" ) {
-//        cout << "Longest subsequence: " << maxSequencePalindrome(another2 ) << endl;
-//    }
 }

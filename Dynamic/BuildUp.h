@@ -22,24 +22,32 @@
 #include "PalStruct.h"
 #include <string>
 #include <vector>
+#include <iostream>                             /* Used for debugging */
 
 class BuildUp {
 
-    BuildUp( std::string original ) : original(original) {}
+    public:
+
+        BuildUp( std::string original ) : original(original) {
+            currentDiagonal = 1;
+            currentCell = Coord( 0, 1 );
+        }
 
     private:
         std::string original;
         std::vector< std::vector<PalStruct> > table;
-	// row and column struct
-	// 
+        // row and column struct
+        // 
         Coord currentCell;
         size_t currentDiagonal;
+
+    public:
 
         // resize the array to size of original (allows for string x string table)
         void initArray();
 
         // Populate the diagonal with single character PalStructs
-	// base case
+        // base case
         void populateDiagonal();
 
         // returns false if a call to increment cell would push this out of
@@ -52,14 +60,14 @@ class BuildUp {
 
         // increments the cell down the diagonal
         void incrementCell();
-       
-	// once there are no more cells for incrementCell()
+
+        // once there are no more cells for incrementCell()
         // increments the diagonal to the upper right
         void incrementDiagonal();
 
         // calculates the current PalStruct based on the recursive relationship
         // that is in the rest of the array
-	// does the comparisons between indices
+        // does the comparisons between indices
         void calcCell();
 
         // returns whether the character represented by the currentCell are

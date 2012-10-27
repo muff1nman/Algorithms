@@ -25,6 +25,10 @@
 
 struct Coord {
     size_t row,col;
+
+    Coord( ) : row(0), col(0) {}
+
+    Coord( size_t row, size_t col) : row(row), col(col) {}
 };
 
 // encapsulate with a namespace to prevent collisions
@@ -38,6 +42,8 @@ struct PalStruct {
     ParentType::Parent parent;
 
     size_t maxPalSeqSize;
+
+    PalStruct( ) : parent( ParentType::BASECASE ), maxPalSeqSize( 0 ) {}
 
     PalStruct( ParentType::Parent parent, size_t maxPalSeqSize ) :
         parent(parent), maxPalSeqSize( maxPalSeqSize ) {}

@@ -48,6 +48,7 @@ void BuildUp::incrementCell() {
 void BuildUp::incrementDiagonal() {
 	//incrementing hasNextDiagonal
 	++currentDiagonal;
+    currentCell = Coord( 0, currentDiagonal);
 }
 
 void BuildUp::calcCell() {
@@ -63,10 +64,10 @@ void BuildUp::calcCell() {
             setCurrent( ParentType::DOWN );
         }
     }
-
 }
 
 bool BuildUp::charactersMatch() {
+    std::cout << "Row: " << currentCell.row << "Col: " << currentCell.col << std::endl;
     return original[currentCell.row] == original[currentCell.col];
 }
 
@@ -102,21 +103,25 @@ void BuildUp::setCurrent( ParentType::Parent parent ) {
 }
 
 std::string BuildUp::getPalindromeSubsequence () {
-    
+    return this->recursiveTraceback( Coord( 0, original.size() - 1 ) );
 }
 
 std::string BuildUp::recursiveTraceback( Coord current ) {
+    std::string empty;
     if ( table[current.row][current.col].parent == ParentType::BASECASE ) {
         // two base cases... a single character and two characters
         if ( current.row == current.col ) {
             // single character
-            return original[current.row];
+            empty.push_back( original[current.row] ) ;
         } else {
             // double character (the same but use row and col just for
             // correctness
-            return orginal[current.row] + original[current.col];
+            empty.push_back( original[current.row] );
+            empty.push_back( original[current.col] );
         }
+        return empty;
     }
+
 
     // TODO
 }
