@@ -33,13 +33,15 @@ int main () {
     cout << "Dynamic programming algorithm to find the maximum palindrome" <<
         endl;
 
-    string test = "hello";
+    string test = "maria";
     BuildUp mananger( test );
 
     mananger.initArray();
     mananger.populateDiagonal();
+    mananger.printTable();
     while ( mananger.hasNextDiagonal() ) {
         while ( mananger.hasNextCell() ) {
+            std::cout << "cell: (" << mananger.currentCell.row << ", " << mananger.currentCell.col << ")" << std::endl;
             mananger.calcCell();
             mananger.incrementCell();
         } 
@@ -47,6 +49,9 @@ int main () {
         mananger.incrementDiagonal();
     }
 
+    mananger.printTable();
+
+    cout << "Here" << endl;
     cout << mananger.getPalindromeSubsequence() << endl;
 
 

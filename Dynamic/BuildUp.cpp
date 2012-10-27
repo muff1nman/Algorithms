@@ -23,9 +23,9 @@ void BuildUp::populateDiagonal() {
 bool BuildUp::hasNextCell() {
  	//as long as incrment both col and row does not put you out of row
 	//continue hasNextCell
-	if (currentCell.row + 1 == original.size()) {
+	if (currentCell.row  == original.size()) {
 		return false;
-	} else if (currentCell.col + 1 == original.size()){ 
+	} else if (currentCell.col == original.size()){ 
 		return false;
 	} else {
 		return true;
@@ -48,7 +48,8 @@ void BuildUp::incrementCell() {
 void BuildUp::incrementDiagonal() {
 	//incrementing hasNextDiagonal
 	++currentDiagonal;
-    currentCell = Coord( 0, currentDiagonal);
+    std::cout << "Diagonal after increment: " << currentDiagonal << std::endl;
+    currentCell = Coord( 0, currentDiagonal );
 }
 
 void BuildUp::calcCell() {
@@ -72,8 +73,8 @@ bool BuildUp::charactersMatch() {
 }
 
 PalStruct BuildUp::getAdjacent( ParentType::Parent parent ) {
-    size_t row = this->currentCell.row;
-    size_t col = this->currentCell.col;
+    int row = this->currentCell.row;
+    int col = this->currentCell.col;
 
     // pretty self explanatory here.  Just remember that diagonal is down and to
     // the left
@@ -103,25 +104,77 @@ void BuildUp::setCurrent( ParentType::Parent parent ) {
 }
 
 std::string BuildUp::getPalindromeSubsequence () {
-    return this->recursiveTraceback( Coord( 0, original.size() - 1 ) );
+    Coord test( 0, original.size() - 1 );
+
+    std::cout << "Using Coord(" << test.row << ", " << test.col << ")" << std::endl;
+    return this->recursiveTraceback( test  );
 }
 
 std::string BuildUp::recursiveTraceback( Coord current ) {
+    std::cout << "Using Coord(" << current.row << ", " << current.col << ")" << std::endl;
     std::string empty;
     if ( table[current.row][current.col].parent == ParentType::BASECASE ) {
         // two base cases... a single character and two characters
         if ( current.row == current.col ) {
             // single character
+            std::cout << "Choose single character: " << original[current.row] << std::endl;
             empty.push_back( original[current.row] ) ;
-        } else {
-            // double character (the same but use row and col just for
-            // correctness
-            empty.push_back( original[current.row] );
-            empty.push_back( original[current.col] );
-        }
+        } 
+//        else {
+//            // double character (the same but use row and col just for
+//            // correctness
+//            std::cout << "Choose double character: " << original[current.row] << original[current.col] << std::endl;
+//            empty.push_back( original[current.row] );
+//            empty.push_back( original[current.col] );
+//        }
         return empty;
     }
 
+    if ( table[current.row][current.col].parent == ParentType::DIAGONAL ) {
+        std::cout << "Prepend and append: " << original[ current.row ] << std::endl;
+        Coord another = current + Coord(1,-1);
+        std::cout << "another: (" << another.row << ", " << another.col << ")" << std::endl; 
+        return original[ current.row ] + recursiveTraceback( another ) + original[ current.col ];
+    }
 
-    // TODO
+
+    if ( table[current.row][current.col].parent == ParentType::LEFT ) {
+        std::cout << "Use left" << std::endl;
+        Coord another = current + Coord(0,-1);
+        std::cout << "another: (" << another.row << ", " << another.col << ")" << std::endl; 
+        return recursiveTraceback( another  );
+    }
+    if ( table[current.row][current.col].parent == ParentType::DOWN ) {
+        std::cout << "Use Down" << std::endl;
+        Coord another = current + Coord(1,0);
+        std::cout << "another: (" << another.row << ", " << another.col << ")" << std::endl; 
+        return recursiveTraceback( another );
+    }
+
+    std::cout << "We got problems" << std::endl;
+
+    return "";
+
+}
+
+void BuildUp::printTable() {
+    for ( unsigned int i = 0; i< table.size(); ++i ) {
+        for ( unsigned int j = 0; j < table[i].size(); ++j ) {
+
+            if ( table[i][j].parent == ParentType::BASECASE ) {
+                std::cout << "B";
+            }
+            if ( table[i][j].parent == ParentType::DIAGONAL ) {
+                std::cout << "D";
+            }
+            if ( table[i][j].parent == ParentType::LEFT ) {
+                std::cout << "L";
+            }
+            if ( table[i][j].parent == ParentType::DOWN ) {
+                std::cout << "W";
+            }
+
+        }
+        std::cout << std::endl;
+    }
 }

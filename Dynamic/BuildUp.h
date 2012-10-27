@@ -24,6 +24,8 @@
 #include <vector>
 #include <iostream>                             /* Used for debugging */
 
+#pragma once
+
 class BuildUp {
 
     public:
@@ -33,7 +35,6 @@ class BuildUp {
             currentCell = Coord( 0, 1 );
         }
 
-    private:
         std::string original;
         std::vector< std::vector<PalStruct> > table;
         // row and column struct
@@ -87,5 +88,7 @@ class BuildUp {
         // the recursive traceback from the upper right to the base case
         // (main diagonal)
         std::string recursiveTraceback( Coord parent );
+
+        void printTable();
 };
 
