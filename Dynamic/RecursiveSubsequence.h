@@ -61,7 +61,7 @@ static std::string LongestPalindromeSubsequenceDynamic(std::string str)
             }
             else {
                 std::string left = palindromeTable[i][j-1];
-                std::string right = palindromeTable[i+1][j
+                std::string right = palindromeTable[i+1][j];
                 palindromeTable[i][j] =  (left.length() <= right.length()) ?  right : left;
             }
         }
