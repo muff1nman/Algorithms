@@ -27,7 +27,7 @@
 #include <cstdlib>
 #include <iostream>
 
-
+// a simple (x,y) or (row,col) coordinate
 struct Coord {
     int row,col;
 
@@ -39,19 +39,19 @@ struct Coord {
         Coord toReturn;
         toReturn.row = this->row + other.row;
         toReturn.col = this->col + other.col;
-//        std::cout << "other row: " << other.row << " this row: " << this->row << std::endl;
-//        std::cout << "row: " << toReturn.row << " col: " << toReturn.col << std::endl;
         return toReturn;
     }
 };
 
 // encapsulate with a namespace to prevent collisions
 namespace ParentType {
+    // choose cell
     enum Parent {
         LEFT, DIAGONAL, DOWN, BASECASE
     };
 }
 
+// Holds a reference and a size
 struct PalStruct {
     ParentType::Parent parent;
 
@@ -74,24 +74,7 @@ struct PalStruct {
         return this->maxPalSeqSize == other.maxPalSeqSize;
     }
 
-    //friend std::ostream& operator << ( std::ostream& out, const PalStruct& toPrint ) ;
-
 };
 
-
-//std::ostream& operator << ( std::ostream& out, const PalStruct& toPrint ) {
-//    if ( toPrint.parent == ParentType::BASECASE ) {
-//        out << "B";
-//    }
-//    if ( toPrint.parent == ParentType::DIAGONAL ) {
-//        out << "D";
-//    }
-//    if ( toPrint.parent == ParentType::LEFT ) {
-//        out << "L";
-//    }
-//    if ( toPrint.parent == ParentType::DOWN ) {
-//        out << "W";
-//    }
-//}
 
 #endif

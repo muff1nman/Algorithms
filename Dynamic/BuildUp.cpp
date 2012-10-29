@@ -105,7 +105,6 @@ void BuildUp::setCurrent( ParentType::Parent parent ) {
 }
 
 std::string BuildUp::getPalindromeSubsequence () {
-
     // start at the top right
     return this->recursiveTraceback( Coord( 0, original.size() - 1 ) );
 }

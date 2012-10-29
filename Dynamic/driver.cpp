@@ -44,14 +44,9 @@ int main () {
             mananger.calcCell();
             mananger.incrementCell();
         } 
-
         mananger.incrementDiagonal();
     }
 
-
     cout << mananger.getPalindromeSubsequence() << endl;
-
-
-
 
 }
