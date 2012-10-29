@@ -37,8 +37,8 @@ class BuildUp {
 
         std::string original;
         std::vector< std::vector<PalStruct> > table;
+
         // row and column struct
-        // 
         Coord currentCell;
         size_t currentDiagonal;
 

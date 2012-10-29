@@ -34,23 +34,23 @@ static std::string LongestPalindromeSubsequenceDynamic(std::string str)
     std::vector<std::vector<std::string> > palindromeTable;
 
     // Fill the array with blanks spaces.
-    for( int i = 0; i < str.length(); i++) {
+    for(unsigned int i = 0; i < str.length(); i++) {
         std::vector<std::string> temp;
-        for (int j = 0; j < str.length(); j++) {
+        for (unsigned int j = 0; j < str.length(); j++) {
             temp.push_back(" ");
         }
         palindromeTable.push_back(temp);
     }
 
     // Fill the array's diagonal with character of the strings.
-    for (int i = 0; i < str.length(); i++) {
+    for (unsigned int i = 0; i < str.length(); i++) {
        palindromeTable[i][i] = str[i];
     }
 
 
-    for (int substringLength = 2; substringLength <= str.length(); substringLength++)
+    for (unsigned int substringLength = 2; substringLength <= str.length(); substringLength++)
     {
-        for (int i = 0; i < str.length() - substringLength + 1; i++)
+        for (unsigned int i = 0; i < str.length() - substringLength + 1; i++)
         {
             int j = i + substringLength - 1;
             if (str[i] == str[j] && substringLength == 2) {

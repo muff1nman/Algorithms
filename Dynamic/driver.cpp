@@ -30,18 +30,17 @@
 using namespace std;
 
 int main () {
-    cout << "Dynamic programming algorithm to find the maximum palindrome" <<
-        endl;
 
-    string test = "ACGTGTCAAAATCG";
+    string test = "HELLOWORLD";
+    cout << "Dynamic programming algorithm to find the maximum palindromic"\
+        " subsequence of: " << test << endl;
+
     BuildUp mananger( test );
 
     mananger.initArray();
     mananger.populateDiagonal();
-    mananger.printTable();
     while ( mananger.hasNextDiagonal() ) {
         while ( mananger.hasNextCell() ) {
-            std::cout << "cell: (" << mananger.currentCell.row << ", " << mananger.currentCell.col << ")" << std::endl;
             mananger.calcCell();
             mananger.incrementCell();
         } 
@@ -49,9 +48,7 @@ int main () {
         mananger.incrementDiagonal();
     }
 
-    mananger.printTable();
 
-    cout << "Here" << endl;
     cout << mananger.getPalindromeSubsequence() << endl;
 
 
