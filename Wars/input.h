@@ -20,10 +20,16 @@
  */
 #include <cstdlib>
 #include <fstream>
-#include <iostream>
 #include "debug.h"
+#include <utility>
+#include "ConnMatrix.h"
 
-int** import(char* filename) {
+// only needed when in debug mode
+#ifdef D_INPUT
+#include <iostream>
+#endif
+
+ConnMatrix import(char* filename) {
     std::fstream file;
     int sizeOfN;
 
@@ -39,12 +45,33 @@ int** import(char* filename) {
 #endif
 
     // create a new int array to return
-    int** connections = new int*[ sizeOfN ];
+    ConnMatrix connections;
+    connections.resize( sizeOfN );
     for ( int i = 0; i < sizeOfN ; ++i ) {
-        connections[i] = new int[ sizeOfN ];
+        connections[i].resize( sizeOfN );
+    }
+
+    for( int i = 0; i < sizeOfN; ++ i ) {
+        for ( int j = 0; j < sizeOfN; ++j ) {
+            file >> connections[i][j];
+        }
     }
 
     return connections;
-    
 }
+
+#ifdef D_INPUT
+// print a 2d array
+void printArray( ConnMatrix array ) {
+    std::cout << "Array: " << std::endl;
+    for (unsigned int i = 0; i < array.size(); ++i ) {
+
+        for ( unsigned int j = 0; j < array[i].size(); ++j ) {
+            std::cout << array[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+    std::cout << "EndArray" << std::endl;
+}
+#endif
 

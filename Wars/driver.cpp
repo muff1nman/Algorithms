@@ -20,6 +20,9 @@
 #include <stdlib.h>
 #include <iostream>
 #include "input.h"
+#include <utility>
+#include "ConnMatrix.h"
+#include <vector>
 
 using namespace std;
 
@@ -27,5 +30,9 @@ int main () {
     cout << "    ALGO WARS" << endl;
     cout << "=================" << endl;
 
-    int** connections = import( "example1.txt" );
+    ConnMatrix connections = import( "example1.txt" );
+
+    printArray( connections );
+
+
 }
