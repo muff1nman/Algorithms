@@ -4,7 +4,7 @@ all : driver
 driver : driver.o
 	@g++ $(flags) driver.o -o driver
 
-driver.o : driver.cpp
+driver.o : driver.cpp input.h
 	@g++ $(flags) -c driver.cpp
 
 clean : 

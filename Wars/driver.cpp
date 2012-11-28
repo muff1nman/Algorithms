@@ -19,6 +19,7 @@
  */
 #include <stdlib.h>
 #include <iostream>
+#include "input.h"
 
 using namespace std;
 
@@ -26,4 +27,5 @@ int main () {
     cout << "    ALGO WARS" << endl;
     cout << "=================" << endl;
 
+    int** connections = import( "example1.txt" );
 }
