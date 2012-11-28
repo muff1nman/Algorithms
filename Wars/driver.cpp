@@ -11,6 +11,8 @@
  *       Compiler:  gcc
  *
  *         Author:  Andrew DeMaria (muff1nman), ademaria@mines.edu
+ *                  Matt Stech, mstech@mines.edu
+ *                  Aakash Shah, ashah@mines.edu
  *   Organization:  Colorado School of Mines
  *
  * =====================================================================================
@@ -23,4 +25,5 @@ using namespace std;
 int main () {
     cout << "    ALGO WARS" << endl;
     cout << "=================" << endl;
+
 }
