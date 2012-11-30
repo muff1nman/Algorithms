@@ -48,8 +48,8 @@ int calculatePathCost( ConnMatrix connections, std::vector<int> path ) {
     int cost = 0;
     // for each pair of componets, ( i and j) add the distance *
     // number of connections between those components to the cost
-    for ( int i = 0; i < connections.size(); ++i ) {
-        for( int j = i + 1; j < connections[i].size(); ++j ) {
+    for ( unsigned int i = 0; i < connections.size(); ++i ) {
+        for( unsigned int j = i + 1; j < connections[i].size(); ++j ) {
             cost += distance( path, i, j ) * connections[i][j];
         }
     }
@@ -64,11 +64,11 @@ std::vector<int> exhastive( ConnMatrix connections ) {
     int currentBestCost = INT_MAX;
 
     // get a first permuate
-    for ( int i = 0; i < connections.size(); ++i ) {
+    for ( int i = 0; (unsigned int)i < connections.size(); ++i ) {
         current.push_back( i );
     }
 
-    std::sort( current.begin(), current.end() );
+    //std::sort( current.begin(), current.end() );
 
     // for each permutation: 
     //    see if it beats the current champ
@@ -77,7 +77,15 @@ std::vector<int> exhastive( ConnMatrix connections ) {
 #ifdef D_EXHASTIVE
         std::cout << "Permutation: ";
         printVector( current );
+        std::cout << "Best: ";
+        printVector( currentBest );
 #endif
+
+        for( unsigned int i = 0; i < current.size(); ++i ) {
+            std::cout << i << " ";
+        }
+        std::cout << std::endl;
+
         currentCost = calculatePathCost( connections, current );
         if ( currentCost < currentBestCost ) {
             currentBest = current;

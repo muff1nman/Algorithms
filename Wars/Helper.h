@@ -22,7 +22,7 @@
 #pragma once
 
 void printVector( std::vector<int> toPrint ) {
-    for ( int i = 0 ; i < toPrint.size(); ++i ) {
+    for ( unsigned int i = 0 ; i < toPrint.size(); ++i ) {
         std::cout << i << " ";
     }
     std::cout << std::endl;
