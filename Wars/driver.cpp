@@ -26,6 +26,8 @@
 #include "Helper.h"
 #include "Exhastive.h"
 
+#include "Matt.h"
+
 using namespace std;
 
 int main () {
@@ -39,6 +41,11 @@ int main () {
     std::vector<int> solution = exhastive( connections );
 
     printVector( solution );
+
+    //std::vector<ModuleConnection> solutionStech = stech( connections );
+
+    stech( connections );
+    
 
 }
 
