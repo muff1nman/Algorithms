@@ -24,9 +24,12 @@
 #include "ConnMatrix.h"
 #include <vector>
 #include "Helper.h"
+#ifdef EXHASTIVE
 #include "Exhastive.h"
-
+#endif
+#ifdef MATT
 #include "Matt.h"
+#endif
 
 using namespace std;
 
@@ -38,13 +41,21 @@ int main () {
 
     printArray( connections );
 
-    std::vector<int> solution = exhastive( connections );
+
+    /*-----------------------------------------------------------------------------
+     *  See debug.h for choosing algorithm to run!!
+     *-----------------------------------------------------------------------------*/
+#ifdef  EXHASTIVE
+    vector<int> solution = exhastive( connections );
 
     printVector( solution );
+    cout << "With cost: " << calculatePathCost( connections, solution ) << endl;
+#endif
 
-    //std::vector<ModuleConnection> solutionStech = stech( connections );
-
+#ifdef MATT
+    vector<ModuleConnection> solutionStech = stech( connections );
     stech( connections );
+#endif
     
 
 }

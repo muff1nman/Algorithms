@@ -1,4 +1,5 @@
 flags = -g -Wall
+
 all : driver
 
 driver : driver.o
