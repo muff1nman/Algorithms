@@ -33,11 +33,24 @@
 
 using namespace std;
 
-int main () {
+bool checkArgs( int argc, char** argv ) {
+    if (argc != 2) {
+        cout << "Usage: ./driver <inputfilename>" << endl;
+        return false;
+    }
+
+    return true;
+}
+
+int main (int argc, char** argv) {
     cout << "    ALGO WARS" << endl;
     cout << "=================" << endl;
 
-    ConnMatrix connections = import( "example1.txt" );
+    if ( !checkArgs( argc, argv ) ) {
+        exit(1);
+    }
+
+    ConnMatrix connections = import( argv[1] );
 
     printArray( connections );
 
