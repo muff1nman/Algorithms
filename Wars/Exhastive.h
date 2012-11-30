@@ -24,6 +24,8 @@
 #include "debug.h"
 #include "Helper.h"
 
+#pragma once
+
 // calculate the absolute distance between two unique componets in a
 // array.  (i.e. if they are adjacent, return 1.  If there is a
 // component between them return 2 )
@@ -72,6 +74,10 @@ std::vector<int> exhastive( ConnMatrix connections ) {
     //    see if it beats the current champ
     int currentCost;
     while ( std::next_permutation( current.begin(), current.end() ) ) {
+#ifdef D_EXHASTIVE
+        std::cout << "Permutation: ";
+        printVector( current );
+#endif
         currentCost = calculatePathCost( connections, current );
         if ( currentCost < currentBestCost ) {
             currentBest = current;
