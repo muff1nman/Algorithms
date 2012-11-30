@@ -16,6 +16,7 @@
  * =====================================================================================
  */
 
+#pragma once
 
 class ModuleConnection {
   public:
@@ -43,8 +44,7 @@ std::vector<int> stech(ConnMatrix connections) {
 
   std::sort( edges.begin(), edges.end() );
 
-  for (int i = 0; i < edges.size(); ++i)
-    cout << "Edge " << i << ": " << edges.at(i) << endl;
+  return edges;
 }
 
 
