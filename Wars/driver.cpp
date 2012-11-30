@@ -23,6 +23,8 @@
 #include <utility>
 #include "ConnMatrix.h"
 #include <vector>
+#include "Helper.h"
+#include "Exhastive.h"
 
 using namespace std;
 
@@ -34,5 +36,10 @@ int main () {
 
     printArray( connections );
 
+    std::vector<int> solution = exhastive( connections );
+
+    printVector( solution );
 
 }
+
+
