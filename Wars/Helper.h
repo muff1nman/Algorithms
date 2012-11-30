@@ -19,7 +19,7 @@
 #include <cstdlib>
 #include <vector>
 #include <iostream>
-
+#pragma once
 
 void printVector( std::vector<int> toPrint ) {
     for ( int i = 0 ; i < toPrint.size(); ++i ) {
