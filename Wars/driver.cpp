@@ -71,7 +71,6 @@ int main (int argc, char** argv) {
     //vector<ModuleConnection> solutionStech = stech( connections );
     stech( connections );
 #endif
-    
 
 }
 

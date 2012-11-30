@@ -20,6 +20,7 @@
 
 #include <vector>
 #include <cstdlib>
+#include "debug.h"
 
 class ModuleConnection {
     public:
@@ -48,10 +49,11 @@ void stech(ConnMatrix connections) {
         }
     }
 
-    std::sort( edges.begin(), edges.end() );
-
+    std::sort( edges.rbegin(), edges.rend() );
+#ifdef D_MATT_edges
     for (int i = 0; i < edges.size(); ++i)
         std::cout << "Edge " << i << ": " << edges.at(i).getWeight() << std::endl;
+#endif
 }
 
 
