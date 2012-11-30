@@ -68,7 +68,7 @@ int main (int argc, char** argv) {
 #endif
 
 #ifdef MATT
-    vector<ModuleConnection> solutionStech = stech( connections );
+    //vector<ModuleConnection> solutionStech = stech( connections );
     stech( connections );
 #endif
     
