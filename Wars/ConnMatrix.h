@@ -11,7 +11,10 @@
  *       Compiler:  gcc
  *
  *         Author:  Andrew DeMaria (muff1nman), ademaria@mines.edu
- *   Organization:  
+ *                  Matt Stech (mstech), mstech@mines.edu
+ *                  Aakash Shah (aashah), ashah@mines.edu
+ *                  Josh Wretlind (joshWretlind), jwretlin@mines.edu
+ *   Organization:  Colorado School of Mines
  *
  * =====================================================================================
  */
