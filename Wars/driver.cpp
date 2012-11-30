@@ -40,11 +40,12 @@ int main () {
 
     std::vector<int> solution = exhastive( connections );
 
-    std::vector<int> solutionStech = stech( connections );
-
     printVector( solution );
 
-    printVector( solutionStech );
+    //std::vector<ModuleConnection> solutionStech = stech( connections );
+
+    stech( connections );
+    
 
 }
 

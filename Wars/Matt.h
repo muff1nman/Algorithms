@@ -18,6 +18,8 @@
 
 #pragma once
 
+#include <vector>
+
 class ModuleConnection {
   public:
     ModuleConnection(int v1, int v2, int w) :
@@ -25,15 +27,17 @@ class ModuleConnection {
       vertex2(v2),
       weight(w) {}
     
-    bool operator<(const ModuleConnection& other) { return weight < other.weight; }
+    int getWeight() const { return weight; }
 
+    bool operator<(const ModuleConnection& other) const { return weight < other.getWeight(); }
+    private:
     int vertex1;
     int vertex2;
     int weight;
     
 };
-std::vector<int> stech(ConnMatrix connections) {
-  vector<ModuleConnection> edges;
+void stech(ConnMatrix connections) {
+  std::vector<ModuleConnection> edges;
 
   for (int i = 0; i < connections.size(); ++i) {
     for (int j = i; j < connections.at(i).size(); ++i) {
@@ -43,8 +47,9 @@ std::vector<int> stech(ConnMatrix connections) {
   }
 
   std::sort( edges.begin(), edges.end() );
-
-  return edges;
+  
+  for (int i = 0; i < edges.size(); ++i)
+    std::cout << "Edge " << i << ": " << edges.at(i).getWeight() << std::endl;
 }
 
 
