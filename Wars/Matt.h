@@ -4,6 +4,35 @@
  *       Filename:  Matt.h
  *
  *    Description:  A greedy algorithm made by Matthew Stech Ph.d
+ *                  
+ *
+ *                  How Andrew understands it:
+ *
+ *                  method main() :
+ *
+ *                      Order the edges by the number of connections,
+ *                      hightest to lowest called C
+ *    
+ *                      instatiate a collection of lists called Q
+ *
+ *                      put each vertix into its own list in Q
+ *    
+ *                      while Q does not have a list with n vertices
+ *                          remove top edge from C
+ *                          call join on list with vertex C.v1 and on
+ *                          list with vertex C.v2
+ *    
+ *                      done
+ *
+ *                  method joinlist( L1, L2 ):
+ *                      // vertex1 is the first vertex that was used
+ *                      to grab L1 while vertex2 is the same for L2
+ *                      if ( both vertex1 and vertex2 are on a
+ *                      boundary in their perspective lists ):
+ *                          flip
+ *
+ *
+ *
  *
  *        Version:  1.0
  *        Created:  11/30/2012 11:23:00am MTC
