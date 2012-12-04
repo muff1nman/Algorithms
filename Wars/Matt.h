@@ -37,8 +37,6 @@
  *                          NewList = L1 and L2
  *
  *
- *                  TODO later change else to minimize cost increase
- *
  *        Version:  1.0
  *        Created:  11/30/2012 11:23:00am MTC
  *       Revision:  none

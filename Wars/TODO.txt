@@ -1,0 +1,14 @@
+A List of Bugs, TODOs and general note for the group!
+
+TODOS:
+Priority  Short Description
+==================================
+2         Create class to hold l
+7         TODO later change else to minimize cost increase
+
+Notes:
+==================================
+
+
+Bugs:
+==================================
