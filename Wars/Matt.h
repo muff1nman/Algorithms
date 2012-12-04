@@ -21,6 +21,7 @@
  *                          remove top edge from C
  *                          call join on list with vertex C.v1 and on
  *                          list with vertex C.v2
+ *                          
  *    
  *                      done
  *
@@ -29,10 +30,14 @@
  *                      to grab L1 while vertex2 is the same for L2
  *                      if ( both vertex1 and vertex2 are on a
  *                      boundary in their perspective lists ):
- *                          flip
+ *                          flip L1 so that vertex1 is on the back
+ *                          flip L2 so that vertex2 is on the front
+ *                          NewList = L1 + L2
+ *                      else:
+ *                          NewList = L1 and L2
  *
  *
- *
+ *                  TODO later change else to minimize cost increase
  *
  *        Version:  1.0
  *        Created:  11/30/2012 11:23:00am MTC
