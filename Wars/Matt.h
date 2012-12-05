@@ -81,11 +81,15 @@ vector<int> stech(ConnMatrix connections) {
   vector<int> result;
   queue<ModuleConnection> ignore;
 
-  bool dataLoc[size];
-  for (int i = 0; i < size; ++i)
-    dataLoc[i] = false;
 
   int emptySlots = connections.size();
+  
+  cout << "SIZZZE: " << emptySlots << endl;
+
+  bool dataLoc[emptySlots];
+  for (int i = 0; i < emptySlots; ++i)
+    dataLoc[i] = false;
+
   for (int i = 0; i < size; ++i) {
     ModuleConnection mc = edges.at(i);
 
@@ -97,7 +101,7 @@ vector<int> stech(ConnMatrix connections) {
     const int v2 = mc.getVertexTwo();
     int weight = mc.getWeight();
 
-    if (emptySlots == size) {
+    if (emptySlots == connections.size()) {
       //add the two right away
       result.push_back(v1);
       result.push_back(v2);
@@ -136,7 +140,6 @@ vector<int> stech(ConnMatrix connections) {
 
     }
   }
-  
   while (!ignore.empty() && emptySlots > 0) {
     ModuleConnection mc = ignore.front();
     const int v1 = mc.getVertexOne();
