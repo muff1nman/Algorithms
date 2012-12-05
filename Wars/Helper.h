@@ -60,7 +60,7 @@ int calculatePathCost(const ConnMatrix& connections, const std::vector<int>& pat
 
 void printVector( const std::vector<int>& toPrint ) {
     for ( unsigned int i = 0 ; i < toPrint.size(); ++i ) {
-        std::cout << toPrint[i] << " ";
+        std::cout << toPrint[i] + 1 << " ";
     }
     std::cout << std::endl;
 }

@@ -42,8 +42,11 @@ void checkArgs( int argc, char** argv ) {
 }
 
 int main (int argc, char** argv) {
+#ifdef SHOWGROUP
     cout << "    ALGO WARS" << endl;
+    cout << "     Group 8" << endl;
     cout << "=================" << endl;
+#endif
 
     try {
         checkArgs( argc, argv );
@@ -66,14 +69,14 @@ int main (int argc, char** argv) {
     solution = exhastive( connections );
 
     printVector( solution );
-    cout << "With cost: " << calculatePathCost( connections, solution ) << endl;
+    cout << calculatePathCost( connections, solution ) << endl;
 #endif
 
 #ifdef MATT
     solution = stech( connections );
 
     printVector(solution);
-    cout << "With cost: " << calculatePathCost(connections, solution) << endl;
+    cout << calculatePathCost(connections, solution) << endl;
 #endif
 }
 
