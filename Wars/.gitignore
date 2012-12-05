@@ -1,3 +1,5 @@
 output-k-graph.txt
 output-random-graph.txt
 *.swp
+output-ring-graph.txt
+output-disconnected-graph.txt
