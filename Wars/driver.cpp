@@ -61,17 +61,19 @@ int main (int argc, char** argv) {
     /*-----------------------------------------------------------------------------
      *  See debug.h for choosing algorithm to run!!
      *-----------------------------------------------------------------------------*/
+     vector<int> solution;
 #ifdef  EXHASTIVE
-    vector<int> solution = exhastive( connections );
+    solution = exhastive( connections );
 
     printVector( solution );
     cout << "With cost: " << calculatePathCost( connections, solution ) << endl;
 #endif
 
 #ifdef MATT
-    //vector<ModuleConnection> solutionStech = stech( connections );
-    stech( connections );
-#endif
+    solution = stech( connections );
 
+    printVector(solution);
+    cout << "With cost: " << calculatePathCost(connections, solution) << endl;
+#endif
 }
 

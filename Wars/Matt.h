@@ -49,7 +49,7 @@ bool shouldAddToStart(int listSize, int index, int weight);
 void addToResult(vector<int>& list, int moduleToAdd, int moduleAlreadyInThere, int weight);
 
 
-void stech(ConnMatrix connections) {
+vector<int> stech(ConnMatrix connections) {
 #ifdef D_MATT
   cout << "BEGINNING STECH ALGORITHM\n";
 #endif
@@ -70,11 +70,9 @@ void stech(ConnMatrix connections) {
   sort( edges.rbegin(), edges.rend() );
   size = edges.size(); 
 #ifdef D_MATT
-  for (unsigned int i = 0; i < edges.size(); ++i)
-#ifdef D_MATT
-    cout << "Edge " << i << ": " << edges.at(i).getWeight() << endl;
-#endif
-
+  cout << "SIZE: " << size << endl;
+  for (int i = 0; i < size; ++i)
+    cout << "Edge " << i << " (v1, v2): (" << edges.at(i).getVertexOne() << ", " << edges.at(i).getVertexTwo() << ") " << edges.at(i).getWeight() << endl;
 #endif
 
   vector<int> result;
@@ -89,11 +87,9 @@ void stech(ConnMatrix connections) {
     ModuleConnection mc = edges.at(i);
 
 #ifdef D_MATT
-#ifdef D_MATT
     cout << "Got edge " << i << ": " << mc.getWeight() << endl;
 #endif
 
-#endif
     const int v1 = mc.getVertexOne();
     const int v2 = mc.getVertexTwo();
     int weight = mc.getWeight();
@@ -160,14 +156,17 @@ void stech(ConnMatrix connections) {
       cout << "Adding from ignore list: " << v2 << endl;
 #endif
 
+    } else if (dataLoc[v1] == false && dataLoc[v2] == false) {
+#ifdef D_MATT
+      cout << "Putting (v1, v2) (" << v1 << ", " << v2 << ") back at the end!\n";
+#endif
+      ignore.push(mc);
     }
     ignore.pop();
-  }
 
-#ifdef D_MATT
-  printVector(result);
-  cout << "With cost: " << calculatePathCost(connections, result);
-#endif
+  }
+  
+  return result;
 
 }
 
