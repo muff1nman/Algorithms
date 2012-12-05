@@ -73,74 +73,66 @@ void stech(ConnMatrix connections) {
   for (int i = 0; i < size; ++i)
     dataLoc[i] = false;
 
-  int emptySlots = connections.size();
-
-  while (edges.size() > 0 && emptySlots > 0) {
-
-    for (int i = 0; i < edges.size(); ++i) {
-      ModuleConnection mc = edges.at(i);
+  int emptySlots = size;
+  for (int i = 0; i < size; ++i) {
+    ModuleConnection mc = edges.at(i);
 
 #ifdef D_MATT
-      cout << "Got edge " << i << ": " << mc.getWeight() << endl;
+    cout << "Got edge " << i << ": " << mc.getWeight() << endl;
 #endif
-      const int v1 = mc.getVertexOne();
-      const int v2 = mc.getVertexTwo();
-      int weight = mc.getWeight();
+    const int v1 = mc.getVertexOne();
+    const int v2 = mc.getVertexTwo();
+    int weight = mc.getWeight();
 
-      if (emptySlots == connections.size()) {
-        //add the two right away
-        result.push_back(v1);
-        result.push_back(v2);
+    if (emptySlots == size) {
+      //add the two right away
+      result.push_back(v1);
+      result.push_back(v2);
 
-        edges.erase(edges.begin() + i);
-        edges.erase(edges.begin() + i + 1);
+      dataLoc[v1] = dataLoc[v2] = true;
+      emptySlots -= 2;
 
-        dataLoc[v1] = dataLoc[v2] = true;
-        emptySlots -= 2;
-        --i;
-        cout << "Adding: " << v1 << " - " << v2 << endl;
-      } else if (dataLoc[v1] == false && dataLoc[v2] == true) {
-        //v1 not in result yet, v2 does exist, add v1
-        //find the index of v2
-        int index;
-        for (int j = 0; j < result.size(); j++) {
-          if (result.at(j) == v2)
-            index = j;
-        }
-        //minimize distance by checking whether to add at the front or end
-        if (shouldAddToStart(size, index, weight)) {
-          result.insert(result.begin(), v1);
-        } else {
-          result.insert(result.end(), v1);
-        }
+      cout << "Adding: " << v1 << " - " << v2 << endl;
+    } else if (dataLoc[v1] == false && dataLoc[v2] == true) {
+      //v1 not in result yet, v2 does exist, add v1
+      //find the index of v2
+      int index;
+      for (int j = 0; j < result.size(); j++) {
+        if (result.at(j) == v2)
+          index = j;
+      }
+      //minimize distance by checking whether to add at the front or end
+      if (shouldAddToStart(size, index, weight)) {
+        result.insert(result.begin(), v1);
+      } else {
+        result.insert(result.end(), v1);
+      }
+      dataLoc[v1] = true;
+      emptySlots--;
+      cout << "Adding " << v1 << endl;
+    } else if (dataLoc[v1] == true && dataLoc[v2] == false) {
+      //v2 not in result yet, v1 does, add v2
+      int index;
 
-        edges.erase(edges.begin() + i);
-        dataLoc[v1] = true;
-        emptySlots--;
-        i--;
-        cout << "Adding " << v1 << endl;
-      } else if (dataLoc[v1] == true && dataLoc[v2] == false) {
-        //v2 not in result yet, v1 does, add v2
-        int index;
+      for (int j = 0; j < result.size(); j++) {
+        if (result.at(j) == v1)
+          index = j;
+      }
 
-        for (int j = 0; j < result.size(); j++) {
-          if (result.at(j) == v1)
-            index = j;
-        }
-
-        if (shouldAddToStart(size, index, weight)) {
-          result.insert(result.begin(), v2);
-        } else {
-          result.insert(result.end(), v2);
-        }
-        edges.erase(edges.begin() + 1);
-        dataLoc[v2] = true;
-        emptySlots--;
-        i--;
-        cout << "Adding " << v2 << endl;
-      } 
+      if (shouldAddToStart(size, index, weight)) {
+        result.insert(result.begin(), v2);
+      } else {
+        result.insert(result.end(), v2);
+      }
+      dataLoc[v2] = true;
+      emptySlots--;
+      cout << "Adding " << v2 << endl;
+    } else {
+      ignore.push(mc);
+      cout << "Adding to ignore list\n";
     }
   }
+
   for (int i = 0; i < result.size(); ++i)
     cout << result.at(i) << " \n";
 }
