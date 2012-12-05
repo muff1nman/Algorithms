@@ -62,6 +62,7 @@ vector<int> stech(ConnMatrix connections) {
 #ifdef D_MATT
    cout << "Size: " << size << endl;
 #endif
+   // get all the connections
   for (int i = 0; i < size; ++i) {
     for (int j = i; j < size; ++j) {
       int weight = connections.at(i).at(j);
@@ -72,6 +73,7 @@ vector<int> stech(ConnMatrix connections) {
     }
   }
 
+  // sort all the connections
   sort( edges.rbegin(), edges.rend() );
   size = edges.size(); 
 #ifdef D_MATT
@@ -85,7 +87,9 @@ vector<int> stech(ConnMatrix connections) {
 
 
   int emptySlots = connections.size();
-  
+ 
+  // keep track of what connections have been assigned spots in the
+  // array
   bool dataLoc[emptySlots];
   for (int i = 0; i < emptySlots; ++i)
     dataLoc[i] = false;
@@ -140,6 +144,11 @@ vector<int> stech(ConnMatrix connections) {
 
     }
   }
+
+#ifdef D_MATT
+  cout << "Number of empty slots at this point is: " << emptySlots << endl;
+#endif
+
   while (!ignore.empty() && emptySlots > 0) {
     ModuleConnection mc = ignore.front();
     const int v1 = mc.getVertexOne();

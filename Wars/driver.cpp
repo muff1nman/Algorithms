@@ -51,10 +51,17 @@ int main (int argc, char** argv) {
     try {
         checkArgs( argc, argv );
     } catch( int x ) {
+        cout << "Exiting with error status: " << x << endl;
         exit(x);
     }
 
-    ConnMatrix connections = import( argv[1] );
+    ConnMatrix connections;
+    try {
+        connections = import( argv[1] );
+    } catch(  int x ) {
+        cout << "Exiting with error status: " << x << endl;
+        exit(x);
+    }
 
 #ifdef D_INPUT
     printArray( connections );

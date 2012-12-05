@@ -45,6 +45,10 @@ ConnMatrix import(char* filename) {
   std::cout << "The number of components is: " << sizeOfN << std::endl;
 #endif
 
+  if ( sizeOfN < 1 || sizeOfN > 100 ) {
+      throw INVALID_GRAPH;
+  }
+
   // create a new int array to return
   ConnMatrix connections;
   connections.resize( sizeOfN );
@@ -54,7 +58,9 @@ ConnMatrix import(char* filename) {
 
   for( int i = 0; i < sizeOfN; ++ i ) {
     for ( int j = 0; j < sizeOfN; ++j ) {
-      file >> connections[i][j];
+      if (! file >> connections[i][j] )  {
+          throw INVALID_GRAPH;
+      }
     }
   }
 
