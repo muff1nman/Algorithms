@@ -21,6 +21,9 @@
 #include <vector>
 #include <queue>
 
+#include "Helper.h"
+
+
 using namespace std;
 
 class ModuleConnection {
@@ -47,7 +50,10 @@ void addToResult(vector<int>& list, int moduleToAdd, int moduleAlreadyInThere, i
 
 
 void stech(ConnMatrix connections) {
+#ifdef D_MATT
   cout << "BEGINNING STECH ALGORITHM\n";
+#endif
+
   vector<ModuleConnection> edges;
 
   int size = connections.size();
@@ -64,8 +70,11 @@ void stech(ConnMatrix connections) {
   sort( edges.rbegin(), edges.rend() );
   size = edges.size(); 
 #ifdef D_MATT
-  for (int i = 0; i < edges.size(); ++i)
+  for (unsigned int i = 0; i < edges.size(); ++i)
+#ifdef D_MATT
     cout << "Edge " << i << ": " << edges.at(i).getWeight() << endl;
+#endif
+
 #endif
 
   vector<int> result;
@@ -80,7 +89,10 @@ void stech(ConnMatrix connections) {
     ModuleConnection mc = edges.at(i);
 
 #ifdef D_MATT
+#ifdef D_MATT
     cout << "Got edge " << i << ": " << mc.getWeight() << endl;
+#endif
+
 #endif
     const int v1 = mc.getVertexOne();
     const int v2 = mc.getVertexTwo();
@@ -94,44 +106,78 @@ void stech(ConnMatrix connections) {
       dataLoc[v1] = dataLoc[v2] = true;
       emptySlots -= 2;
 
+#ifdef D_MATT
       cout << "Adding: " << v1 << " - " << v2 << endl;
+#endif
+
     } else if (dataLoc[v1] == false && dataLoc[v2] == true) {
       //v1 not in result yet, v2 does exist, add v1
       //find the index of v2
       addToResult(result, v1, v2, weight);
       dataLoc[v1] = true;
       emptySlots--;
-      cout << "Adding " << v1 << endl;
+#ifdef D_MATT
+      cout << "ADding " << v1 << endl;
+#endif
+
     } else if (dataLoc[v1] == true && dataLoc[v2] == false) {
       //v2 not in result yet, v1 does, add v2
       addToResult(result, v2, v1, weight);
       dataLoc[v2] = true;
       emptySlots--;
+#ifdef D_MATT
       cout << "Adding " << v2 << endl;
+#endif
+
     } else {
       ignore.push(mc);
+#ifdef D_MATT
       cout << "Adding to ignore list\n";
+#endif
+
     }
   }
   
   while (!ignore.empty() && emptySlots > 0) {
     ModuleConnection mc = ignore.front();
-    
+    const int v1 = mc.getVertexOne();
+    const int v2 = mc.getVertexTwo();
+    const int weight = mc.getWeight();
+
+    if (dataLoc[v1] == false && dataLoc[v2] == true) {
+      addToResult(result, v1, v2, weight);
+      dataLoc[v1] = true;
+      emptySlots--;
+#ifdef D_MATT
+      cout << "ADding from ignore list: " << v1 << endl;
+#endif
+
+    } else if (dataLoc[v1] == true && dataLoc[v2] == false) {
+      addToResult(result, v2, v1, weight);
+      dataLoc[v2] = true;
+      emptySlots--;
+#ifdef D_MATT
+      cout << "Adding from ignore list: " << v2 << endl;
+#endif
+
+    }
     ignore.pop();
   }
 
-  for (int i = 0; i < result.size(); ++i)
-    cout << result.at(i) << " \n";
+#ifdef D_MATT
+  printVector(result);
+  cout << "With cost: " << calculatePathCost(connections, result);
+#endif
+
 }
 
 
 bool shouldAddToStart(int listSize, int index, int weight) {
   return (index * weight) < ((listSize - index) * weight);
 }
-
 void addToResult(vector<int>& list, int moduleToAdd, int moduleAlreadyInThere, int weight) {
   int index = -1;
-  for (int i = 0; i < list.size(); i++)
+  for (unsigned int i = 0; i < list.size(); i++)
     if (list.at(i) == moduleAlreadyInThere)
       index = i;
   if (index == -1)
