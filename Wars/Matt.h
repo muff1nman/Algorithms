@@ -96,6 +96,7 @@ void stech(ConnMatrix connections) {
     } else if (dataLoc[v1] == false && dataLoc[v2] == true) {
       //v1 not in result yet, v2 does exist, add v1
       //find the index of v2
+      addToResult(result, 
       int index;
       for (int j = 0; j < result.size(); j++) {
         if (result.at(j) == v2)
@@ -131,6 +132,12 @@ void stech(ConnMatrix connections) {
       ignore.push(mc);
       cout << "Adding to ignore list\n";
     }
+  }
+  
+  while (!ignore.empty() && emptySlots > 0) {
+    ModuleConnection mc = ignore.top();
+    
+    mc.pop();
   }
 
   for (int i = 0; i < result.size(); ++i)
