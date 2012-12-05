@@ -48,7 +48,8 @@ class ModuleConnection {
 
 bool shouldAddToStart(int listSize, int index, int weight);
 void addToResult(vector<int>& list, int moduleToAdd, int moduleAlreadyInThere, int weight);
-void addToResult_modified(vector<int>& list, int moduleToAdd, int moduleAlreadyInThere, int weight, ConnMatrix connections);
+void addToResult_modified(vector<int>& list, int moduleToAdd, int moduleAlreadyInThere, int weight, const ConnMatrix& connections);
+int returnRowCost( const vector<int>& list, int moduleToAdd, const ConnMatrix& connections, bool direction );
 
 vector<int> stech(ConnMatrix connections) {
 #ifdef D_MATT
@@ -117,7 +118,7 @@ vector<int> stech(ConnMatrix connections) {
     } else if (dataLoc[v1] == false && dataLoc[v2] == true) {
       //v1 not in result yet, v2 does exist, add v1
       //find the index of v2
-      addToResult(result, v1, v2, weight);
+      addToResult_modified(result, v1, v2, weight, connections);
       dataLoc[v1] = true;
       emptySlots--;
 #ifdef D_MATT
@@ -126,7 +127,7 @@ vector<int> stech(ConnMatrix connections) {
 
     } else if (dataLoc[v1] == true && dataLoc[v2] == false) {
       //v2 not in result yet, v1 does, add v2
-      addToResult(result, v2, v1, weight);
+      addToResult_modified(result, v2, v1, weight, connections);
       dataLoc[v2] = true;
       emptySlots--;
 #ifdef D_MATT
@@ -148,7 +149,7 @@ vector<int> stech(ConnMatrix connections) {
     const int weight = mc.getWeight();
 
     if (dataLoc[v1] == false && dataLoc[v2] == true) {
-      addToResult(result, v1, v2, weight);
+      addToResult_modified(result, v1, v2, weight, connections);
       dataLoc[v1] = true;
       emptySlots--;
 #ifdef D_MATT
@@ -156,7 +157,7 @@ vector<int> stech(ConnMatrix connections) {
 #endif
 
     } else if (dataLoc[v1] == true && dataLoc[v2] == false) {
-      addToResult(result, v2, v1, weight);
+      addToResult_modified(result, v2, v1, weight, connections);
       dataLoc[v2] = true;
       emptySlots--;
 #ifdef D_MATT
@@ -203,13 +204,13 @@ void addToResult_modified(vector<int>& list, int moduleToAdd, int moduleAlreadyI
     int front;
     int back;
 
-    front = returnRowCost( list, modeuleToAdd, connections, 0);
-    back = returnRowCost( list, modeuleToAdd, connections, 1);
+    front = returnRowCost( list, moduleToAdd, connections, 0);
+    back = returnRowCost( list, moduleToAdd, connections, 1);
 
     if ( front < back ) {
-        list.insert( list.begin(), modeuleToAdd );
+        list.insert( list.begin(), moduleToAdd );
     } else {
-        list.push_back( modeuleToAdd );
+        list.push_back( moduleToAdd );
     }
 
     return;
@@ -219,7 +220,7 @@ void addToResult_modified(vector<int>& list, int moduleToAdd, int moduleAlreadyI
 // returns the cost of the first entry in the list
 // direction = 0 -- front to back
 // direction = 1 -- back to front
-int returnRowCost( const vector<int>& list, int modeuleToAdd, const ConnMatrix& connections, bool direction ) {
+int returnRowCost( const vector<int>& list, int moduleToAdd, const ConnMatrix& connections, bool direction ) {
     int sum = 0;
 //    if ( direction ) {
 //        for( int i  = 0; i < list.size(); ++i ) {
