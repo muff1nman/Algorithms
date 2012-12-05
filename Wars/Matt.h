@@ -20,6 +20,7 @@
 
 #include <vector>
 #include <queue>
+#include <algorithm>
 
 #include "Helper.h"
 
@@ -47,7 +48,8 @@ class ModuleConnection {
 
 bool shouldAddToStart(int listSize, int index, int weight);
 void addToResult(vector<int>& list, int moduleToAdd, int moduleAlreadyInThere, int weight);
-
+void addToResult_modified(vector<int>& list, int moduleToAdd, int moduleAlreadyInThere, int weight, const ConnMatrix& connections);
+int returnRowCost( const vector<int>& list, int moduleToAdd, const ConnMatrix& connections, bool direction );
 
 vector<int> stech(ConnMatrix connections) {
 #ifdef D_MATT
@@ -84,8 +86,6 @@ vector<int> stech(ConnMatrix connections) {
 
   int emptySlots = connections.size();
   
-  cout << "SIZZZE: " << emptySlots << endl;
-
   bool dataLoc[emptySlots];
   for (int i = 0; i < emptySlots; ++i)
     dataLoc[i] = false;
@@ -116,7 +116,7 @@ vector<int> stech(ConnMatrix connections) {
     } else if (dataLoc[v1] == false && dataLoc[v2] == true) {
       //v1 not in result yet, v2 does exist, add v1
       //find the index of v2
-      addToResult(result, v1, v2, weight);
+      addToResult_modified(result, v1, v2, weight, connections);
       dataLoc[v1] = true;
       emptySlots--;
 #ifdef D_MATT
@@ -125,7 +125,7 @@ vector<int> stech(ConnMatrix connections) {
 
     } else if (dataLoc[v1] == true && dataLoc[v2] == false) {
       //v2 not in result yet, v1 does, add v2
-      addToResult(result, v2, v1, weight);
+      addToResult_modified(result, v2, v1, weight, connections);
       dataLoc[v2] = true;
       emptySlots--;
 #ifdef D_MATT
@@ -147,7 +147,7 @@ vector<int> stech(ConnMatrix connections) {
     const int weight = mc.getWeight();
 
     if (dataLoc[v1] == false && dataLoc[v2] == true) {
-      addToResult(result, v1, v2, weight);
+      addToResult_modified(result, v1, v2, weight, connections);
       dataLoc[v1] = true;
       emptySlots--;
 #ifdef D_MATT
@@ -155,7 +155,7 @@ vector<int> stech(ConnMatrix connections) {
 #endif
 
     } else if (dataLoc[v1] == true && dataLoc[v2] == false) {
-      addToResult(result, v2, v1, weight);
+      addToResult_modified(result, v2, v1, weight, connections);
       dataLoc[v2] = true;
       emptySlots--;
 #ifdef D_MATT
@@ -195,4 +195,56 @@ void addToResult(vector<int>& list, int moduleToAdd, int moduleAlreadyInThere, i
   } else {
     list.insert(list.end(), moduleToAdd);
   }
+}
+
+void addToResult_modified(vector<int>& list, int moduleToAdd, int moduleAlreadyInThere, int weight, const ConnMatrix& connections) {
+    // cost increase for putting the moduleToAdd in the front / back
+    int front;
+    int back;
+
+    front = returnRowCost( list, moduleToAdd, connections, 0);
+    back = returnRowCost( list, moduleToAdd, connections, 1);
+
+    if ( front < back ) {
+        list.insert( list.begin(), moduleToAdd );
+    } else {
+        list.push_back( moduleToAdd );
+    }
+
+    return;
+
+}
+
+// returns the cost of the first entry in the list
+// direction = 0 -- front to back
+// direction = 1 -- back to front
+int returnRowCost( const vector<int>& list, int moduleToAdd, const ConnMatrix& connections, bool direction ) {
+    int sum = 0;
+//    if ( direction ) {
+//        for( int i  = 0; i < list.size(); ++i ) {
+//            // i + 1 represents the distance and size - 1 - i is the
+//            // index into the list
+//            // connections[ list[size - 1 - i]][moduleToAdd]
+//            // represents the weight
+//            sum += (i + 1) * connections[ list[ list.size() - 1 - i ][ moduleToAdd ];
+//        }
+//    } else {
+//        for ( int i = 0; i < list.size(); ++i) {
+//            // i --> index into list and i + 1 represents the distance
+//            // connections[list[i]][moduleToAdd] represents the weight
+//            sum += (i + 1) * connections[ list[i] ][ moduleToAdd ];
+//        }
+//    }
+
+    int weight;
+    for( int i = 0; i < list.size(); ++i ) {
+        if ( direction ) {
+            weight = connections[ list[ list.size() - 1 - i ] ][ moduleToAdd ];
+        } else {
+            weight = connections[ list[i] ][ moduleToAdd ];
+        }
+        sum += (i + 1) * weight;
+    }
+
+    return sum;
 }
