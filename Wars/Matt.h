@@ -43,6 +43,8 @@ class ModuleConnection {
 };
 
 bool shouldAddToStart(int listSize, int index, int weight);
+void addToResult(vector<int>& list, int moduleToAdd, int moduleAlreadyInThere, int weight);
+
 
 void stech(ConnMatrix connections) {
   cout << "BEGINNING STECH ALGORITHM\n";
@@ -96,35 +98,13 @@ void stech(ConnMatrix connections) {
     } else if (dataLoc[v1] == false && dataLoc[v2] == true) {
       //v1 not in result yet, v2 does exist, add v1
       //find the index of v2
-      addToResult(result, 
-      int index;
-      for (int j = 0; j < result.size(); j++) {
-        if (result.at(j) == v2)
-          index = j;
-      }
-      //minimize distance by checking whether to add at the front or end
-      if (shouldAddToStart(size, index, weight)) {
-        result.insert(result.begin(), v1);
-      } else {
-        result.insert(result.end(), v1);
-      }
+      addToResult(result, v1, v2, weight);
       dataLoc[v1] = true;
       emptySlots--;
       cout << "Adding " << v1 << endl;
     } else if (dataLoc[v1] == true && dataLoc[v2] == false) {
       //v2 not in result yet, v1 does, add v2
-      int index;
-
-      for (int j = 0; j < result.size(); j++) {
-        if (result.at(j) == v1)
-          index = j;
-      }
-
-      if (shouldAddToStart(size, index, weight)) {
-        result.insert(result.begin(), v2);
-      } else {
-        result.insert(result.end(), v2);
-      }
+      addToResult(result, v2, v1, weight);
       dataLoc[v2] = true;
       emptySlots--;
       cout << "Adding " << v2 << endl;
@@ -135,9 +115,9 @@ void stech(ConnMatrix connections) {
   }
   
   while (!ignore.empty() && emptySlots > 0) {
-    ModuleConnection mc = ignore.top();
+    ModuleConnection mc = ignore.front();
     
-    mc.pop();
+    ignore.pop();
   }
 
   for (int i = 0; i < result.size(); ++i)
@@ -147,4 +127,19 @@ void stech(ConnMatrix connections) {
 
 bool shouldAddToStart(int listSize, int index, int weight) {
   return (index * weight) < ((listSize - index) * weight);
+}
+
+void addToResult(vector<int>& list, int moduleToAdd, int moduleAlreadyInThere, int weight) {
+  int index = -1;
+  for (int i = 0; i < list.size(); i++)
+    if (list.at(i) == moduleAlreadyInThere)
+      index = i;
+  if (index == -1)
+    return;
+
+  if (shouldAddToStart(list.size(), index, weight)) {
+    list.insert(list.begin(), moduleToAdd);
+  } else {
+    list.insert(list.end(), moduleToAdd);
+  }
 }
