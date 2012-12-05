@@ -29,6 +29,7 @@
 #define FILENAME_INVALID 2
 #define INVALID_ARGUMENTS 3
 #define INVALID_GRAPH 4
+#define MODULECONNECTION_NOTFOUND 5
 
 
 /*-----------------------------------------------------------------------------

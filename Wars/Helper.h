@@ -36,7 +36,7 @@ int distance(const std::vector<int>& path, int one, int two ) {
     std::vector<int>::const_iterator two_index = std::find( path.begin(), path.end(), two);
 
     if ( one_index == path.end() || two_index == path.end() ) {
-        return -1;
+        return 0;
     }
 
     return abs( one_index - two_index );
