@@ -86,8 +86,6 @@ vector<int> stech(ConnMatrix connections) {
 
   int emptySlots = connections.size();
   
-  cout << "SIZZZE: " << emptySlots << endl;
-
   bool dataLoc[emptySlots];
   for (int i = 0; i < emptySlots; ++i)
     dataLoc[i] = false;
