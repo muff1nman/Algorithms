@@ -31,48 +31,48 @@
 #endif
 
 ConnMatrix import(char* filename) {
-    std::fstream file;
-    int sizeOfN;
+  std::fstream file;
+  int sizeOfN;
 
-    file.open( filename );
-    if ( ! file ) {
-        throw FILENAME_INVALID;
-    }
+  file.open( filename );
+  if ( ! file ) {
+    throw FILENAME_INVALID;
+  }
 
-    file >> sizeOfN;
+  file >> sizeOfN;
 
 #ifdef D_INPUT
-    std::cout << "The number of components is: " << sizeOfN << std::endl;
+  std::cout << "The number of components is: " << sizeOfN << std::endl;
 #endif
 
-    // create a new int array to return
-    ConnMatrix connections;
-    connections.resize( sizeOfN );
-    for ( int i = 0; i < sizeOfN ; ++i ) {
-        connections[i].resize( sizeOfN );
-    }
+  // create a new int array to return
+  ConnMatrix connections;
+  connections.resize( sizeOfN );
+  for ( int i = 0; i < sizeOfN ; ++i ) {
+    connections[i].resize( sizeOfN );
+  }
 
-    for( int i = 0; i < sizeOfN; ++ i ) {
-        for ( int j = 0; j < sizeOfN; ++j ) {
-            file >> connections[i][j];
-        }
+  for( int i = 0; i < sizeOfN; ++ i ) {
+    for ( int j = 0; j < sizeOfN; ++j ) {
+      file >> connections[i][j];
     }
+  }
 
-    return connections;
+  return connections;
 }
 
 #ifdef D_INPUT
 // print a 2d array
 void printArray( ConnMatrix array ) {
-    std::cout << "Array: " << std::endl;
-    for (unsigned int i = 0; i < array.size(); ++i ) {
+  std::cout << "Array: " << std::endl;
+  for (unsigned int i = 0; i < array.size(); ++i ) {
 
-        for ( unsigned int j = 0; j < array[i].size(); ++j ) {
-            std::cout << array[i][j] << " ";
-        }
-        std::cout << std::endl;
+    for ( unsigned int j = 0; j < array[i].size(); ++j ) {
+      std::cout << array[i][j] << " ";
     }
-    std::cout << "EndArray" << std::endl;
+    std::cout << std::endl;
+  }
+  std::cout << "EndArray" << std::endl;
 }
 #endif
 
