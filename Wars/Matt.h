@@ -20,6 +20,7 @@
 
 #include <vector>
 #include <queue>
+#include <algorithm>
 
 #include "Helper.h"
 
@@ -47,7 +48,7 @@ class ModuleConnection {
 
 bool shouldAddToStart(int listSize, int index, int weight);
 void addToResult(vector<int>& list, int moduleToAdd, int moduleAlreadyInThere, int weight);
-
+void addToResult_modified(vector<int>& list, int moduleToAdd, int moduleAlreadyInThere, int weight, ConnMatrix connections);
 
 vector<int> stech(ConnMatrix connections) {
 #ifdef D_MATT
@@ -192,4 +193,56 @@ void addToResult(vector<int>& list, int moduleToAdd, int moduleAlreadyInThere, i
   } else {
     list.insert(list.end(), moduleToAdd);
   }
+}
+
+void addToResult_modified(vector<int>& list, int moduleToAdd, int moduleAlreadyInThere, int weight, const ConnMatrix& connections) {
+    // cost increase for putting the moduleToAdd in the front / back
+    int front;
+    int back;
+
+    front = returnRowCost( list, modeuleToAdd, connections, 0);
+    back = returnRowCost( list, modeuleToAdd, connections, 1);
+
+    if ( front < back ) {
+        list.insert( list.begin(), modeuleToAdd );
+    } else {
+        list.push_back( modeuleToAdd );
+    }
+
+    return;
+
+}
+
+// returns the cost of the first entry in the list
+// direction = 0 -- front to back
+// direction = 1 -- back to front
+int returnRowCost( const vector<int>& list, int modeuleToAdd, const ConnMatrix& connections, bool direction ) {
+    int sum = 0;
+//    if ( direction ) {
+//        for( int i  = 0; i < list.size(); ++i ) {
+//            // i + 1 represents the distance and size - 1 - i is the
+//            // index into the list
+//            // connections[ list[size - 1 - i]][moduleToAdd]
+//            // represents the weight
+//            sum += (i + 1) * connections[ list[ list.size() - 1 - i ][ moduleToAdd ];
+//        }
+//    } else {
+//        for ( int i = 0; i < list.size(); ++i) {
+//            // i --> index into list and i + 1 represents the distance
+//            // connections[list[i]][moduleToAdd] represents the weight
+//            sum += (i + 1) * connections[ list[i] ][ moduleToAdd ];
+//        }
+//    }
+
+    int weight;
+    for( int i = 0; i < list.size(); ++i ) {
+        if ( direction ) {
+            weight = connections[ list[ list.size() - 1 - i ] ][ moduleToAdd ];
+        } else {
+            weight = connections[ list[i] ][ moduleToAdd ];
+        }
+        sum += (i + 1) * weight;
+    }
+
+    return sum;
 }
