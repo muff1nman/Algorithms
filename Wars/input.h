@@ -58,7 +58,8 @@ ConnMatrix import(char* filename) {
 
   for( int i = 0; i < sizeOfN; ++ i ) {
     for ( int j = 0; j < sizeOfN; ++j ) {
-      if (! file >> connections[i][j] )  {
+      file >> connections[i][j];
+      if ( file.bad() ) {
           throw INVALID_GRAPH;
       }
     }
