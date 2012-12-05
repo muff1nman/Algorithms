@@ -1,5 +1,5 @@
 from random import *
-numOfNodes = randint(2,100)
+numOfNodes = 6
 output = []
 for i in range(numOfNodes):
     output.append([])
@@ -8,7 +8,7 @@ for i in range(numOfNodes):
             if(randint(0,25) == 5):
                 output[i].append(randint(300,500))
             else:
-                output[i].append(randint(0,25))
+                output[i].append(1)
         elif(i > j):
             output[i].append(output[j][i])
         else:
