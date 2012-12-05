@@ -57,6 +57,9 @@ vector<int> stech(ConnMatrix connections) {
   vector<ModuleConnection> edges;
 
   int size = connections.size();
+#ifdef D_MATT
+   cout << "Size: " << size << endl;
+#endif
   for (int i = 0; i < size; ++i) {
     for (int j = i; j < size; ++j) {
       int weight = connections.at(i).at(j);
@@ -82,7 +85,7 @@ vector<int> stech(ConnMatrix connections) {
   for (int i = 0; i < size; ++i)
     dataLoc[i] = false;
 
-  int emptySlots = size;
+  int emptySlots = connections.size();
   for (int i = 0; i < size; ++i) {
     ModuleConnection mc = edges.at(i);
 
@@ -179,8 +182,10 @@ void addToResult(vector<int>& list, int moduleToAdd, int moduleAlreadyInThere, i
   for (unsigned int i = 0; i < list.size(); i++)
     if (list.at(i) == moduleAlreadyInThere)
       index = i;
-  if (index == -1)
+  if (index == -1) {
+    cout << "ERRORRRRR\n";
     return;
+  }
 
   if (shouldAddToStart(list.size(), index, weight)) {
     list.insert(list.begin(), moduleToAdd);
