@@ -1,0 +1,16 @@
+1. yes & yes
+2. 620 lines
+3. We implemented a greedy algorithm that focused on keeping vertices that had
+shared an edge with a high weight together.  From there we attempted to
+minimize cost increases as lower priority edges were added
+
+5. 25% 4 ways
+6. Matt did a lot of theory and first introducted the algorithm. Andrew and
+Aakash did a lot of the coding alongside Matt & Josh. Josh really helped nail
+out the problems by making pythong scripts to generate tests.
+
+7. Finding a non-exhaustive solution that still performed well for our tests.
+
+8. Make it dynamic, rather than greedy.
+
+9. No, our team worked very well in this setup inspite of having four group members.
