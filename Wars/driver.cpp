@@ -26,15 +26,9 @@
 #include "ConnMatrix.h"
 #include <vector>
 #include "Helper.h"
-#ifdef EXHASTIVE
 #include "Exhastive.h"
-#endif
-#ifdef MATT
 #include "Matt.h"
-#endif
-#ifdef ANDREW
 #include "Andrew.h"
-#endif
 
 using namespace std;
 
@@ -76,6 +70,7 @@ int main (int argc, char** argv) {
      *  See debug.h for choosing algorithm to run!!
      *-----------------------------------------------------------------------------*/
      vector<int> solution;
+     vector<int> solution2;
 #ifdef  EXHASTIVE
     solution = exhastive( connections );
 
@@ -92,9 +87,26 @@ int main (int argc, char** argv) {
 
 #ifdef ANDREW
     solution = andrew( connections );
+    if ( solution.size() != connections.size() ) {
+        cout << "Not Valid!" << endl;
+    }
 
     printVector(solution);
     cout << calculatePathCost(connections, solution) << endl;
 #endif
+
+#ifdef BOTH
+    solution = stech( connections );
+    solution2 = andrew( connections );
+    if ( solution.size() != connections.size() || calculatePathCost( connections, solution) > calculatePathCost( connections, solution2) ) {
+        printVector(solution2);
+        cout << calculatePathCost( connections, solution2 ) << endl;
+    } else {
+        printVector(solution);
+        cout << calculatePathCost(connections, solution) << endl;
+    }
+#endif
+
+
 }
 

@@ -47,4 +47,5 @@
 #define SHOWGROUP
 //#define EXHASTIVE
 //#define MATT
-#define ANDREW
+//#define ANDREW
+#define BOTH
