@@ -36,9 +36,9 @@
  *  Debug defines
  *-----------------------------------------------------------------------------*/
 //#define D_ANDREW
-#define D_INPUT
+//#define D_INPUT
 //#define D_EXHASTIVE
-#define D_MATT
+//#define D_MATT
 
 
 /*-----------------------------------------------------------------------------
