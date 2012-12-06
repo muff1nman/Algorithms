@@ -31,6 +31,9 @@
 #ifdef MATT
 #include "Matt.h"
 #endif
+#ifdef ANDREW
+#include "Andrew.h"
+#endif
 
 using namespace std;
 
@@ -83,6 +86,13 @@ int main (int argc, char** argv) {
     solution = stech( connections );
 
     printVector(solution);
+    cout << calculatePathCost(connections, solution) << endl;
+#endif
+
+#ifdef ANDREW
+    solution = andrew( connections );
+
+    printVector( solution );
     cout << calculatePathCost(connections, solution) << endl;
 #endif
 }
