@@ -149,6 +149,9 @@ vector<int> stech(ConnMatrix connections) {
   cout << "Number of empty slots at this point is: " << emptySlots << endl;
 #endif
 
+  // a tracker for disconnected graphs
+  int track = ignore.size();
+
   while (!ignore.empty() && emptySlots > 0) {
     ModuleConnection mc = ignore.front();
     const int v1 = mc.getVertexOne();
@@ -157,6 +160,8 @@ vector<int> stech(ConnMatrix connections) {
 
     if (dataLoc[v1] == false && dataLoc[v2] == true) {
       addToResult_modified(result, v1, v2, weight, connections);
+      // reset size
+      track = ignore.size();
       dataLoc[v1] = true;
       emptySlots--;
 #ifdef D_MATT
@@ -165,6 +170,8 @@ vector<int> stech(ConnMatrix connections) {
 
     } else if (dataLoc[v1] == true && dataLoc[v2] == false) {
       addToResult_modified(result, v2, v1, weight, connections);
+      // reset size
+      track = ignore.size();
       dataLoc[v2] = true;
       emptySlots--;
 #ifdef D_MATT
@@ -175,7 +182,17 @@ vector<int> stech(ConnMatrix connections) {
 #ifdef D_MATT
       cout << "Putting (v1, v2) (" << v1 << ", " << v2 << ") back at the end!\n";
 #endif
-      ignore.push(mc);
+      // count down track
+      --track;
+      // now if track is zero then we have a disconnected graph...
+      // so now add the current 
+      if ( track == 0 ) {
+          // should make a new group at this point
+          return result;
+      } else {
+
+          ignore.push(mc);
+      }
     }
     ignore.pop();
 
