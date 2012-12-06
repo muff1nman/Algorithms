@@ -1,5 +1,5 @@
 1. yes & yes
-2. 620 lines
+2. 1206 lines
 3. We implemented a greedy algorithm that focused on keeping vertices that had
 shared an edge with a high weight together.  From there we attempted to
 minimize cost increases as lower priority edges were added
@@ -11,6 +11,8 @@ out the problems by making pythong scripts to generate tests.
 
 7. Finding a non-exhaustive solution that still performed well for our tests.
 
-8. Make it dynamic, rather than greedy.
+8. Make it dynamic, rather than greedy. Solve the problem in
+polynomial time.
 
-9. No, our team worked very well in this setup inspite of having four group members.
+9. No, our team worked very well in this setup inspite of having four
+group members.
