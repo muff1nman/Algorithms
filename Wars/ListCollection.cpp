@@ -24,7 +24,7 @@ void ListCollection::joinList( int v1, int v2 ) {
     }
 
     // new list
-    list newList;
+    list newList = new std::vector<int>();
     list current = new std::vector<int>();
 
 
@@ -36,16 +36,46 @@ void ListCollection::joinList( int v1, int v2 ) {
     std::copy_backward( forv2->begin(), forv2->end(), current->end());
 
     // set as best
-    newList = current;
-    int bestCost = calculatePathCost( connections, *current) ;
+    *newList = *current;
+    int tempCost = calculatePathCost( connections, *current) ;
+    int bestCost  = tempCost;
 
     // test more
-    // TODO
+    std::copy_backward( forv2->rbegin(), forv2->rend(), current->end());
+    tempCost = calculatePathCost( connections, *current) ;
+    if ( bestCost > tempCost ) {
+        bestCost = tempCost;
 
+        // set as best
+        *newList = *current;
+    }
+
+    // test more
+    std::copy( forv1->rbegin(), forv1->rend(), current->begin());
+    tempCost = calculatePathCost( connections, *current) ;
+    if ( bestCost > tempCost ) {
+        bestCost = tempCost;
+
+        // set as best
+        *newList = *current;
+    }
+
+    // test more
+    std::copy_backward( forv2->begin(), forv2->end(), current->end());
+    tempCost = calculatePathCost( connections, *current) ;
+    if ( bestCost > tempCost ) {
+        bestCost = tempCost;
+
+        // set as best
+        *newList = *current;
+    }
 
     // delete the old lists
     delete forv1;
     delete forv2;
+
+    // not using current
+    delete current;
 
     // now fix map
     this->fixMap( newList );
@@ -58,9 +88,23 @@ bool ListCollection::isDone( ) {
 }
 
 
-const std::vector<int>& ListCollection::getVector( ) {
+std::vector<int> ListCollection::getVector( ) {
+    std::vector<list> found;
     std::vector<int> theList;
-    // TODO
+
+    for ( VertexToList::iterator i = mapping.begin(); i != mapping.end(); ++i ) {
+        // if found
+        if ( std::find(found.begin(), found.end(), i->second ) == found.end() ) {
+            // add it
+            found.push_back( i->second );
+        }
+    }
+
+    // now insert all the lists into theList
+    for( int i = 0; i < found.size(); ++i) {
+        theList.resize( theList.size() + found[i]->size() );
+        std::copy_backward( found[i]->begin(), found[i]->end(), theList.end() );
+    }
 
     return theList;
 }

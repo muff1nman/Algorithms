@@ -37,7 +37,7 @@ class ListCollection {
         bool isDone( );
 
         // return all lists joined together
-        const std::vector<int>& getVector( );
+        std::vector<int> getVector( );
 
     private:
         VertexToList mapping;

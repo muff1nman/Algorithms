@@ -8,7 +8,7 @@ std::vector<int> andrew( const ConnMatrix& connections ) {
 
     populateEdges(connections, edges );
 
-    while( ! list.isDone() ) {
+    while( !edges.empty() ) {
         list.joinList( edges.front().getVertexOne(), edges.front().getVertexTwo() );
         edges.erase( edges.begin() );
     }
