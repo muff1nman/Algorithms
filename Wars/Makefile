@@ -1,4 +1,4 @@
-flags = -g -Wall
+flags = -g
 
 all : driver
 
