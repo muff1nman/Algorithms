@@ -21,30 +21,12 @@
 #include <vector>
 #include <queue>
 #include <algorithm>
+#include "ModuleConnection.h"
 
 #include "Helper.h"
 
 
 using namespace std;
-
-class ModuleConnection {
-  public:
-    ModuleConnection(int v1, int v2, int w) :
-      vertex1(v1),
-      vertex2(v2),
-      weight(w) {}
-
-    int getWeight() const { return weight; }
-    int getVertexOne() const { return vertex1; }
-    int getVertexTwo() const { return vertex2; }
-
-    bool operator<(const ModuleConnection& other) const { return weight < other.getWeight(); }
-  private:
-    int vertex1;
-    int vertex2;
-    int weight;
-
-};
 
 bool shouldAddToStart(int listSize, int index, int weight);
 void addToResult(vector<int>& list, int moduleToAdd, int moduleAlreadyInThere, int weight);

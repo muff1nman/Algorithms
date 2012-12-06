@@ -18,6 +18,7 @@
  *
  * =====================================================================================
  */
+#include "debug.h"
 #include <stdlib.h>
 #include <iostream>
 #include "input.h"
@@ -92,7 +93,7 @@ int main (int argc, char** argv) {
 #ifdef ANDREW
     solution = andrew( connections );
 
-    printVector( solution );
+    printVector(solution);
     cout << calculatePathCost(connections, solution) << endl;
 #endif
 }

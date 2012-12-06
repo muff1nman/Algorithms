@@ -58,28 +58,14 @@
 #include "debug.h"
 #include "ConnMatrix.h"
 #include "Helper.h"
+#include <vector>
+#include "ModuleConnection.h"
 
-class ModuleConnection {
-  public:
-    ModuleConnection(int v1, int v2, int w) :
-      vertex1(v1),
-      vertex2(v2),
-      weight(w) {}
+std::vector<int> andrew(const ConnMatrix& connections );
 
-    int getWeight() const { return weight; }
-    int getVertexOne() const { return vertex1; }
-    int getVertexTwo() const { return vertex2; }
-
-    bool operator<(const ModuleConnection& other) const { return weight < other.getWeight(); }
-  private:
-    int vertex1;
-    int vertex2;
-    int weight;
-
-};
-
-std::vector<int> andrew( ConnMatrix connections );
-
+// populate edges with nonzero connections
 void populateEdges( const ConnMatrix& connections, std::vector<ModuleConnection>& edges );
 
+// just a function for testing
+void insertOrdered( std::vector<int>& array );
 

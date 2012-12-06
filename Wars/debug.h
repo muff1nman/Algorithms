@@ -35,7 +35,7 @@
 /*-----------------------------------------------------------------------------
  *  Debug defines
  *-----------------------------------------------------------------------------*/
-//#define D_ANDREW
+#define D_ANDREW
 #define D_INPUT
 //#define D_EXHASTIVE
 #define D_MATT
@@ -44,7 +44,7 @@
 /*-----------------------------------------------------------------------------
  *  Runtime choice
  *-----------------------------------------------------------------------------*/
-//#define SHOWGROUP
+#define SHOWGROUP
 //#define EXHASTIVE
-#define MATT
-//#define ANDREW
+//#define MATT
+#define ANDREW
