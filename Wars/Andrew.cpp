@@ -2,15 +2,18 @@
 
 std::vector<int> andrew( const ConnMatrix& connections ) {
     std::vector<ModuleConnection> edges;
-    std::vector<int> toReturn( connections.size() );
-
-#ifdef D_ANDREW
-    insertOrdered(toReturn);
-#endif
+    std::vector<int> initial( connections.size() );
+    insertOrdered(initial);
+    ListCollection list( initial );
 
     populateEdges(connections, edges );
 
-    return toReturn;
+    while( ! list.isDone() ) {
+        list.joinList( edges.front().getVertexOne(), edges.front().getVertexTwo() );
+        edges.erase( edges.begin() );
+    }
+
+    return list.getVector();
 }
 
 void populateEdges( const ConnMatrix& connections, std::vector<ModuleConnection>& edges ) {

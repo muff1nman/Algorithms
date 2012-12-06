@@ -60,6 +60,7 @@
 #include "Helper.h"
 #include <vector>
 #include "ModuleConnection.h"
+#include "ListCollection.h"
 
 std::vector<int> andrew(const ConnMatrix& connections );
 
