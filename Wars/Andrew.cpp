@@ -4,7 +4,7 @@ std::vector<int> andrew( const ConnMatrix& connections ) {
     std::vector<ModuleConnection> edges;
     std::vector<int> initial( connections.size() );
     insertOrdered(initial);
-    ListCollection list( initial );
+    ListCollection list( initial, connections );
 
     populateEdges(connections, edges );
 

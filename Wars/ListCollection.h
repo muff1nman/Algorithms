@@ -20,6 +20,9 @@
 #include <cstdlib>
 #include <map>
 #include <vector>
+#include "ConnMatrix.h"
+#include <algorithm>
+#include "Helper.h"
 
 class ListCollection {
     public:
@@ -27,16 +30,20 @@ class ListCollection {
         typedef std::map< int, list > VertexToList;
         // instantiates an initial collection where each vertex is in its
         // own group
-        ListCollection( const std::vector<int>& initialVertices );
+        ListCollection( const std::vector<int>& initialVertices, const ConnMatrix& connections );
 
         void joinList( int v1, int v2 );
 
         bool isDone( );
 
+        // return all lists joined together
         const std::vector<int>& getVector( );
 
     private:
         VertexToList mapping;
+        ConnMatrix connections;
+
+        void fixMap( list newList );
 };
 
 
