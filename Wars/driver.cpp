@@ -111,7 +111,12 @@ int main (int argc, char** argv) {
 #ifdef BOTH
         solution = stech( connections );
         solution2 = andrew( connections );
-        if ( solution.size() != connections.size() || calculatePathCost( connections, solution) > calculatePathCost( connections, solution2) ) {
+        if ( connections.size() < 9 ) {
+            solution = exhastive( connections );
+            printVector( solution );
+            cout << calculatePathCost( connections, solution ) << endl;
+        }
+        else if ( solution.size() != connections.size() || calculatePathCost( connections, solution) > calculatePathCost( connections, solution2) ) {
             printVector(solution2);
             cout << calculatePathCost( connections, solution2 ) << endl;
         } else {
