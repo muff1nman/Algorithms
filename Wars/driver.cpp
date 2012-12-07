@@ -33,8 +33,9 @@
 using namespace std;
 
 void checkArgs( int argc, char** argv ) {
-    if (argc != 2) {
+    if (argc != 2 && argc != 3) {
         cout << "Usage: ./driver <inputfilename>" << endl;
+        cout << "Usage: ./driver <inputfilename> -c" << endl;
         throw INVALID_ARGUMENTS;
     }
 }
@@ -46,13 +47,6 @@ int main (int argc, char** argv) {
     cout << "=================" << endl;
 #endif
 
-    try {
-        checkArgs( argc, argv );
-    } catch( int x ) {
-        cout << "Exiting with error status: " << x << endl;
-        exit(x);
-    }
-
     ConnMatrix connections;
     try {
         connections = import( argv[1] );
@@ -61,52 +55,71 @@ int main (int argc, char** argv) {
         exit(x);
     }
 
+    if ( argc == 3 ) {
+        std::vector<int> toTest;
+        int temp;
+        for( int i = 0; i < connections.size(); ++i ) {
+            cin >> temp;
+            toTest.push_back( temp - 1 );
+        } 
+
+        cout << "Cost:";
+        cout << calculatePathCost( connections, toTest ) << endl;
+    } else {
+        try {
+            checkArgs( argc, argv );
+        } catch( int x ) {
+            cout << "Exiting with error status: " << x << endl;
+            exit(x);
+        }
+
+
 #ifdef D_INPUT
-    printArray( connections );
+        printArray( connections );
 #endif
 
 
-    /*-----------------------------------------------------------------------------
-     *  See debug.h for choosing algorithm to run!!
-     *-----------------------------------------------------------------------------*/
-     vector<int> solution;
-     vector<int> solution2;
+        /*-----------------------------------------------------------------------------
+         *  See debug.h for choosing algorithm to run!!
+         *-----------------------------------------------------------------------------*/
+        vector<int> solution;
+        vector<int> solution2;
 #ifdef  EXHASTIVE
-    solution = exhastive( connections );
+        solution = exhastive( connections );
 
-    printVector( solution );
-    cout << calculatePathCost( connections, solution ) << endl;
+        printVector( solution );
+        cout << calculatePathCost( connections, solution ) << endl;
 #endif
 
 #ifdef MATT
-    solution = stech( connections );
+        solution = stech( connections );
 
-    printVector(solution);
-    cout << calculatePathCost(connections, solution) << endl;
+        printVector(solution);
+        cout << calculatePathCost(connections, solution) << endl;
 #endif
 
 #ifdef ANDREW
-    solution = andrew( connections );
-    if ( solution.size() != connections.size() ) {
-        cout << "Not Valid!" << endl;
-    }
+        solution = andrew( connections );
+        if ( solution.size() != connections.size() ) {
+            cout << "Not Valid!" << endl;
+        }
 
-    printVector(solution);
-    cout << calculatePathCost(connections, solution) << endl;
+        printVector(solution);
+        cout << calculatePathCost(connections, solution) << endl;
 #endif
 
 #ifdef BOTH
-    solution = stech( connections );
-    solution2 = andrew( connections );
-    if ( solution.size() != connections.size() || calculatePathCost( connections, solution) > calculatePathCost( connections, solution2) ) {
-        printVector(solution2);
-        cout << calculatePathCost( connections, solution2 ) << endl;
-    } else {
-        printVector(solution);
-        cout << calculatePathCost(connections, solution) << endl;
-    }
+        solution = stech( connections );
+        solution2 = andrew( connections );
+        if ( solution.size() != connections.size() || calculatePathCost( connections, solution) > calculatePathCost( connections, solution2) ) {
+            printVector(solution2);
+            cout << calculatePathCost( connections, solution2 ) << endl;
+        } else {
+            printVector(solution);
+            cout << calculatePathCost(connections, solution) << endl;
+        }
 #endif
-
+    }
 
 }
 
